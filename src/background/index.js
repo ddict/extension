@@ -1,6 +1,7 @@
 const ex = chrome || browser
 
 const helper = require('../helper')
+const sample = require('../sample')
 
 // on install or update. check the details for more info
 ex.runtime.onInstalled.addListener(details => {
@@ -9,12 +10,14 @@ ex.runtime.onInstalled.addListener(details => {
 })
 
 ex.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log(
-        sender.tab
-            ? 'from a content script:' + sender.tab.url
-            : 'from the extension'
-    )
-    // if (request.greeting == 'hello') sendResponse({ farewell: 'goodbye' })
+    switch (request.channel) {
+        case 'translate':
+            sendResponse(sample)
+            break
 
-    sendResponse('gaga')
+        default:
+            sendResponse(null)
+    }
+
+    return
 })

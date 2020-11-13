@@ -5,8 +5,8 @@ var Bubble = require('./bubble')
 
 var bubble
 
-function send(data, callback) {
-    chrome.runtime.sendMessage(data, callback)
+function translate(text, cb) {
+    helper.sendMsg({ channel: 'translate', data: text }, cb)
 }
 
 var spin = helper.getURL('/img/spin.gif')
@@ -22,8 +22,9 @@ storage.get('settings', settings => {
 })
 
 function ddict(settings) {
+    console.log(settings)
     bubble = Bubble({
-        dblclick: settings.dblclick,
+        dblclick: settings.dbclick,
         shift: settings.shift,
         btn: settings.icon,
         spin: spin,
@@ -48,26 +49,22 @@ function ddict(settings) {
     })
 
     function onText(text, src, callback) {
-        translate(text, src, function(data) {
-            callback(data.html, data.rtl)
+        translate(text, data => {
+            // get translated text
+            const translated_text = data.sentences
+                .map(sentence => sentence.trans)
+                .join('')
 
-            if (settings.tts) {
-                audio(data.audio)
-            }
+            // TODO: rtl
+            const rtl = false
+
+            callback(translated_text, rtl)
+
+            // TODO: audio
+            // if (settings.tts) {
+            //     audio(data.audio)
+            // }
         })
-    }
-
-    function translate(text, src, callback) {
-        send(
-            {
-                channel: 'translate',
-                src: src || 'content',
-                data: text,
-            },
-            function(data) {
-                callback(data)
-            }
-        )
     }
 
     function audio(url) {

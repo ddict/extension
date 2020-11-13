@@ -18,6 +18,7 @@ function Bubble(opt) {
 
     this.spin = new Image()
     this.src_spin = opt.spin
+    this.logo = new Image()
     this.src_logo = opt.logo
 
     this.class_wrapper = 'ddict_div'

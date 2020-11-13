@@ -1,0 +1,252 @@
+{
+    "sentences": [
+        {
+            "trans": "xin chào",
+            "orig": "hello",
+            "backend": 1
+        },
+        {
+            "src_translit": "heˈlō,həˈlō"
+        }
+    ],
+    "dict": [
+        {
+            "pos": "noun",
+            "terms": ["câu chào", "chào", "tiếng chào"],
+            "entry": [
+                {
+                    "word": "câu chào",
+                    "reverse_translation": ["hello"]
+                },
+                {
+                    "word": "chào",
+                    "reverse_translation": ["hello"]
+                },
+                {
+                    "word": "tiếng chào",
+                    "reverse_translation": ["hello", "salaam"]
+                }
+            ],
+            "base_form": "hello",
+            "pos_enum": 1
+        }
+    ],
+    "src": "en",
+    "confidence": 1,
+    "ld_result": {
+        "srclangs": ["en"],
+        "srclangs_confidences": [1],
+        "extended_srclangs": ["en"]
+    },
+    "synsets": [
+        {
+            "pos": "noun",
+            "entry": [
+                {
+                    "synonym": ["howdy", "hullo", "hi", "how-do-you-do"],
+                    "definition_id": ""
+                }
+            ],
+            "base_form": "hello"
+        },
+        {
+            "pos": "exclamation",
+            "entry": [
+                {
+                    "synonym": ["hi", "howdy", "hey", "hiya", "ciao", "aloha"],
+                    "definition_id": "m_en_us1254307.001"
+                }
+            ],
+            "base_form": "hello"
+        }
+    ],
+    "definitions": [
+        {
+            "pos": "noun",
+            "entry": [
+                {
+                    "gloss": "an utterance of “hello”; a greeting.",
+                    "definition_id": "m_en_us1254307.006",
+                    "example": "she was getting polite nods and hellos from people"
+                }
+            ],
+            "base_form": "hello"
+        },
+        {
+            "pos": "exclamation",
+            "entry": [
+                {
+                    "gloss": "used as a greeting or to begin a telephone conversation.",
+                    "definition_id": "m_en_us1254307.001",
+                    "example": "hello there, Katie!"
+                }
+            ],
+            "base_form": "hello"
+        },
+        {
+            "pos": "verb",
+            "entry": [
+                {
+                    "gloss": "say or shout “hello”; greet someone.",
+                    "definition_id": "m_en_us1254307.007",
+                    "example": "‘Hi Kirsten,’ he helloed , obviously calling me Kirsten on purpose."
+                }
+            ],
+            "base_form": "hello"
+        }
+    ],
+    "examples": {
+        "example": [
+            {
+                "text": "‘Oh, \u003cb\u003ehello\u003c/b\u003e ,’ she'd said to Brett, evidently surprised to see him standing in her kitchen with her daughter.",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.001"
+            },
+            {
+                "text": "‘Oh, \u003cb\u003ehello\u003c/b\u003e ,’ she said acting surprised to see the four boys staring at her.",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.001"
+            },
+            {
+                "text": "I haven't seen her in over a year, and yesterday she just strolls casually up to me and says \u003cb\u003ehello\u003c/b\u003e !",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.001"
+            },
+            {
+                "text": "But instead of a normal greeting like saying \u003cb\u003ehello\u003c/b\u003e or something, they hugged.",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.001"
+            },
+            {
+                "text": "With little more than a \u003cb\u003ehello\u003c/b\u003e , I began to reread the letter that was in my hand.",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.006"
+            },
+            {
+                "text": "Ships' horns toot, children wave and call \u003cb\u003ehello\u003c/b\u003e , and every morning you're awakened by the haunting call of the muezzin from some distant village mosque.",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.001"
+            },
+            {
+                "text": "A man standing in line at the check-out counter of a grocery store was surprised when an attractive woman behind him said \u003cb\u003ehello\u003c/b\u003e .",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.001"
+            },
+            {
+                "text": "I have wanted to re-watch it like a DVD or something, but I couldn't because, \u003cb\u003ehello\u003c/b\u003e !",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.005"
+            },
+            {
+                "text": "I mean, it's nice in the way he wants to serve my sexual needs, but \u003cb\u003ehello\u003c/b\u003e !",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.005"
+            },
+            {
+                "text": "My local Chinese shop owner always greets me with a big smile and a friendly \u003cb\u003ehello\u003c/b\u003e !",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.006"
+            },
+            {
+                "text": "She must have been really stupid to have mimicked me… I mean, \u003cb\u003ehello\u003c/b\u003e !",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.005"
+            },
+            {
+                "text": "\u003cb\u003ehello\u003c/b\u003e, is anybody in?",
+                "source_type": 3,
+                "definition_id": "neid_9508"
+            },
+            {
+                "text": "You are supposed to be able to keep up with my voice, \u003cb\u003ehello\u003c/b\u003e !",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.005"
+            },
+            {
+                "text": "\u003cb\u003ehello\u003c/b\u003e there, Katie!",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.001"
+            },
+            {
+                "text": "\u003cb\u003ehello\u003c/b\u003e there, Katie!",
+                "source_type": 3,
+                "definition_id": "m_en_gb0372340.001"
+            },
+            {
+                "text": "\u003cb\u003ehello\u003c/b\u003e, what's this?",
+                "source_type": 3,
+                "definition_id": "neid_9510"
+            },
+            {
+                "text": "I yelled \u003cb\u003ehello\u003c/b\u003e upstairs as I began to head up to see if I could help Mrs. Bishop out.",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.004"
+            },
+            {
+                "text": "The girl is finding love on the telephone, \u003cb\u003ehello\u003c/b\u003e !",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.005"
+            },
+            {
+                "text": "It was a pleasant surprise when Sheila Sheridan came over to say \u003cb\u003ehello\u003c/b\u003e .",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.001"
+            },
+            {
+                "text": "Like we have time for a life - \u003cb\u003ehello\u003c/b\u003e !",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.005"
+            },
+            {
+                "text": "When their eyes met, she grinned wickedly in an informal \u003cb\u003ehello\u003c/b\u003e .",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.006"
+            },
+            {
+                "text": "Every gathering she beds another partner who isn't her husband, \u003cb\u003ehello\u003c/b\u003e !",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.005"
+            },
+            {
+                "text": "Ric's upset when he finds out that Alf returned from the USA the day before and didn't even say \u003cb\u003ehello\u003c/b\u003e !",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.001"
+            },
+            {
+                "text": "\u003cb\u003ehello\u003c/b\u003e! did you even get what the play was about?",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.005"
+            },
+            {
+                "text": "She whispered \u003cb\u003ehello\u003c/b\u003e , then began to make her way to her room, where she hoped to take a nap.",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.001"
+            },
+            {
+                "text": "It is extraordinary how much can be achieved when you put enthusiasm into a routine task, a special project or a simple \u003cb\u003ehello\u003c/b\u003e or conversation.",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.006"
+            },
+            {
+                "text": "Over the last two days I have been flooded with porn site IMs… \u003cb\u003ehello\u003c/b\u003e !",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.005"
+            },
+            {
+                "text": "We didn't get the chance to get together this visit, but we had nice phone conversation and a waved \u003cb\u003ehello\u003c/b\u003e .",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.006"
+            },
+            {
+                "text": "Logan didn't say \u003cb\u003ehello\u003c/b\u003e , but I hadn't expected a greeting.",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.001"
+            },
+            {
+                "text": "Tlingit people do not use such greetings as \u003cb\u003ehello\u003c/b\u003e , good-bye, good afternoon, or good evening.",
+                "source_type": 3,
+                "definition_id": "m_en_us1254307.001"
+            }
+        ]
+    }
+}
