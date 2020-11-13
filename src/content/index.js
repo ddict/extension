@@ -11,6 +11,7 @@ function translate(text, cb) {
 
 var spin = helper.getURL('/img/spin.gif')
 var logo = helper.getURL('/logo/16.png')
+var tts_img = helper.getURL('/img/audio.png')
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -22,13 +23,13 @@ storage.get('settings', settings => {
 })
 
 function ddict(settings) {
-    console.log(settings)
     bubble = Bubble({
         dblclick: settings.dbclick,
         shift: settings.shift,
         btn: settings.icon,
         spin: spin,
         logo: logo,
+        tts_img: tts_img,
         onText: onText,
         onClick: function(e) {
             //audio
@@ -50,15 +51,10 @@ function ddict(settings) {
 
     function onText(text, src, callback) {
         translate(text, data => {
-            // get translated text
-            const translated_text = data.sentences
-                .map(sentence => sentence.trans)
-                .join('')
-
             // TODO: rtl
             const rtl = false
 
-            callback(translated_text, rtl)
+            callback(data, rtl)
 
             // TODO: audio
             // if (settings.tts) {

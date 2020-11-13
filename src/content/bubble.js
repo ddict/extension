@@ -20,6 +20,10 @@ function Bubble(opt) {
     this.src_spin = opt.spin
     this.logo = new Image()
     this.src_logo = opt.logo
+    this.tts_img = new Image()
+    dom(this.tts_img)
+        .src(opt.tts_img)
+        .addClass('ddict_audio')
 
     this.class_wrapper = 'ddict_div'
     this.class_btn = 'ddict_btn'
@@ -91,7 +95,7 @@ Bubble.prototype.show = function(e, src) {
         return
     }
 
-    //load later
+    // load later
     if (!this.spin.src) {
         self.spin.src = self.src_spin
     }
@@ -125,16 +129,18 @@ Bubble.prototype.show = function(e, src) {
     div.css(style)
 
     //text-align bug in ff
-    div.append(
-        dom(document.createElement('p'))
-            .css('textAlign', 'center')
-            .append(self.spin)
-    )
+    const spinner = dom(document.createElement('p'))
+        .css('textAlign', 'center')
+        .append(self.spin)
+    div.append(spinner)
 
     //center
     self.center(div, select)
 
-    self.onText(select.text, src, function(html, rtl) {
+    self.onText(select.text, src, function(data, rtl) {
+        // remove spinner
+        spinner.remove()
+
         var max_width = select.width
         max_width = max_width < self.min_width ? self.min_width : max_width
 
@@ -149,7 +155,33 @@ Bubble.prototype.show = function(e, src) {
 
         div.css(style)
 
-        div.html(html)
+        // tts img
+        div.append(self.tts_img)
+
+        // translit
+        const translits = data.sentences.filter(
+            sentence => sentence.src_translit
+        )
+        if (translits.length > 0) {
+            const span = dom(document.createElement('span'))
+                .addClass('ddict_translit')
+                .text(translits[0].src_translit)
+
+            const p = dom(document.createElement('p'))
+            p.append(span)
+
+            div.append(p)
+        }
+
+        // sentences
+        const text = data.sentences
+            .map(sentence => (sentence.trans ? sentence.trans : ''))
+            .join('')
+        div.append(
+            dom(document.createElement('p'))
+                .addClass('ddict_sentence')
+                .text(text)
+        )
 
         //center
         self.center(div, select)
