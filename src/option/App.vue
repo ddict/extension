@@ -34,21 +34,25 @@
 
         <br />
 
-        <button
-            class="btn btn-lg btn-secondary btn-block"
-            @click="window.close()"
-        >
+        <button class="btn btn-lg btn-secondary btn-block" @click="close()">
             Close
         </button>
     </div>
 </template>
 
 <script>
+const helper = require('../helper')
+
 module.exports = {
     data() {
         return {
             user: null,
         }
+    },
+    methods: {
+        close() {
+            helper.closeTab()
+        },
     },
 }
 </script>
