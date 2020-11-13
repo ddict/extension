@@ -35,14 +35,7 @@
         {
             "all_frames": true,
             "matches": ["*://*/*", "file:///*/*"],
-            "js": [
-                "/content/dom.js",
-                "/content/scrollleft.js",
-                "/content/scrolltop.js",
-                "/content/selected_text.js",
-                "/content/bubble.js",
-                "/content/index.js"
-            ],
+            "js": ["/content/index.js"],
             "css": ["/content/style.css"]
         }
     ],

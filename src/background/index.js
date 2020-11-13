@@ -1,13 +1,8 @@
-chrome.storage.onChanged.addListener(function(changes, namespace) {
-    for (var key in changes) {
-        var storageChange = changes[key]
-        console.log(
-            'Storage key "%s" in namespace "%s" changed. ' +
-                'Old value was "%s", new value is "%s".',
-            key,
-            namespace,
-            storageChange.oldValue,
-            storageChange.newValue
-        )
-    }
+const ex = chrome || browser
+
+const helper = require('../helper')
+
+ex.runtime.onInstalled.addListener(function(details) {
+    // open option page to set default settings
+    helper.openTab(helper.getURL('/option/index.html'))
 })

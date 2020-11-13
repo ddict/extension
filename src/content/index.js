@@ -1,3 +1,5 @@
+const helper = require('../helper')
+
 var Bubble = require('./bubble')
 
 var bubble
@@ -31,11 +33,8 @@ function send(data, callback) {
     }
 }
 
-var spin = chrome.extension.getURL('/img/spin.gif')
-var logo = chrome.extension.getURL('/logo/16.png')
-
-console.log(spin)
-console.log(logo)
+var spin = helper.getURL('/img/spin.gif')
+var logo = helper.getURL('/logo/16.png')
 
 ////////////////////////////////////////////////////////////////////////
 
