@@ -1,6 +1,6 @@
 var dom = require('./dom')
-var scrolltop = require('./scrolltop')
-var scrollleft = require('./scrollleft')
+var scrolltop = require('scrolltop')
+var scrollleft = require('scrollleft')
 var selected = require('./selected_text')
 
 module.exports = Bubble
@@ -10,8 +10,6 @@ function Bubble(opt) {
         return new Bubble(opt)
     }
 
-    console.log('ghaha')
-
     this.min_width = opt.min_width || 120
 
     this.dblclick = opt.dblclick
@@ -19,16 +17,11 @@ function Bubble(opt) {
     this.btn = opt.btn
 
     this.spin = new Image()
-    this.src_spin =
-        'chrome-extension://jdfaendomoallghhackgbbibiahjhjjl/logo/16.png'
-    this.logo = new Image()
-    this.src_logo =
-        'chrome-extension://jdfaendomoallghhackgbbibiahjhjjl/logo/16.png'
+    this.src_spin = opt.spin
+    this.src_logo = opt.logo
 
     this.class_wrapper = 'ddict_div'
     this.class_btn = 'ddict_btn'
-
-    this.notifications = []
 
     var self = this
 
@@ -48,9 +41,9 @@ function Bubble(opt) {
                     self.show(e, 'shift')
                 }
                 break
+
             case 27: //esc
                 self.hide()
-                self.hideNotification()
                 break
             default:
                 break

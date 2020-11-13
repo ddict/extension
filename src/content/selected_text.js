@@ -1,3 +1,5 @@
+const textarea = require('textarea-caret')
+
 module.exports = SelectedText
 
 function SelectedText(event) {
