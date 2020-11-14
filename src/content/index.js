@@ -1,79 +1,122 @@
 const helper = require('../helper')
 const storage = require('../storage')
 
-var Bubble = require('./bubble')
+const selected = require('./selected_text')
+const bubble = require('./bubble')
 
-var bubble
+const dom = require('component-dom')
+var scrolltop = require('scrolltop')
+var scrollleft = require('scrollleft')
 
-function translate(text, cb) {
-    helper.sendMsg({ channel: 'translate', data: text }, cb)
-}
+// const
+const CLASS_DDICT_BTN = 'ddict_btn'
 
-var spin = helper.getURL('/img/spin.gif')
-var logo = helper.getURL('/logo/16.png')
-var tts_img = helper.getURL('/img/audio.png')
-
-////////////////////////////////////////////////////////////////////////
+// media
+const img_spin = helper.getURL('/img/spin.gif')
+const img_logo = helper.getURL('/logo/16.png')
+const img_speaker = helper.getURL('/img/audio.png')
 
 // get settings
 storage.get('settings', settings => {
     if (!settings) return
 
-    ddict(settings)
+    init(settings)
 })
 
-function ddict(settings) {
-    bubble = Bubble({
-        dblclick: settings.dbclick,
-        shift: settings.shift,
-        btn: settings.icon,
-        spin: spin,
-        logo: logo,
-        tts_img: tts_img,
-        onText: onText,
-        onClick: function(e) {
-            //audio
-            if (!e) {
-                return
-            }
-
-            if (!(e.target && e.target.className)) {
-                return
-            }
-
-            if (e.target.className !== 'ddict_audio') {
-                return
-            }
-
-            audio(e.target.dataset.url)
-        },
-    })
-
-    function onText(text, src, callback) {
-        translate(text, data => {
-            // TODO: rtl
-            const rtl = false
-
-            callback(data, rtl)
-
-            // TODO: audio
-            // if (settings.tts) {
-            //     audio(data.audio)
-            // }
+// listen for selected text
+function init(settings) {
+    // dbclick
+    if (settings.dbclick) {
+        dom('body').on('dblclick', function(e) {
+            check(e)
         })
     }
 
-    function audio(url) {
-        if (!url) {
-            return
-        }
-
-        send(
-            {
-                channel: 'audio',
-                data: url,
-            },
-            function() {}
-        )
+    // shift
+    if (settings.shift) {
+        dom('body').on('keyup', function(e) {
+            if (e && e.keyCode === 16) {
+                check(e)
+            }
+        })
     }
+
+    // ddict icon
+    if (settings.icon) {
+        dom('body').on('mouseup', function(e) {
+            // setTimeout(function() {
+            check(e)
+            // }, 100)
+        })
+    }
+}
+
+function check(e, icon) {
+    const select = getSelectedText(e)
+    if (!select) {
+        return
+    }
+
+    if (icon) {
+        showIcon(e, select)
+        return
+    }
+
+    openBubble(e, select)
+}
+
+function getSelectedText(e) {
+    var select = selected(e)
+
+    if (!select.text) {
+        return
+    }
+
+    if (!select.text.trim().length) {
+        return
+    }
+}
+
+function showIcon(e, select) {
+    const logo = new Image()
+    logo.src = img_logo
+
+    // create img wrapper and set the click event
+    const div = dom(document.createElement('div'))
+        .addClass(CLASS_DDICT_BTN)
+        .appendTo('body')
+        .on('mousedown', function(_e) {
+            openBubble(_e, select)
+            div.remove()
+
+            // TODO: ???
+            // _e.cancelBubble = true
+            // if (_e.stopPropagation) {
+            //     _e.stopPropagation()
+            // }
+        })
+
+    // position
+    const top = e.y || e.clientY
+    const left = select.left + select.width
+
+    div.css({
+        top: top + scrolltop() + 'px',
+        left: left + scrollleft() + 'px',
+    })
+
+    div.append(logo)
+}
+
+function openBubble() {
+    bubble({
+        spin: (new Image().src = img_spin),
+        speaker: (new Image().src = img_speaker),
+
+        translate: translate,
+    })
+}
+
+function translate(text, cb) {
+    helper.sendMsg({ channel: 'translate', data: text }, cb)
 }

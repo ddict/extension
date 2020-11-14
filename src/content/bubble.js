@@ -1,7 +1,6 @@
 var dom = require('component-dom')
 var scrolltop = require('scrolltop')
 var scrollleft = require('scrollleft')
-var selected = require('./selected_text')
 
 module.exports = Bubble
 
@@ -33,19 +32,19 @@ function Bubble(opt) {
     this.onText = opt.onText
     this.onClick = opt.onClick
 
-    if (this.dblclick) {
-        dom('body').on('dblclick', function(e) {
-            self.show(e, 'dblclick')
-        })
-    }
+    // if (this.dblclick) {
+    //     dom('body').on('dblclick', function(e) {
+    //         self.show(e, 'dblclick')
+    //     })
+    // }
 
     dom('body').on('keyup', function(e) {
         switch (e.keyCode) {
-            case 16: //shift
-                if (self.shift) {
-                    self.show(e, 'shift')
-                }
-                break
+            // case 16: //shift
+            //     if (self.shift) {
+            //         self.show(e, 'shift')
+            //     }
+            //     break
 
             case 27: //esc
                 self.hide()
@@ -55,13 +54,13 @@ function Bubble(opt) {
         }
     })
 
-    if (this.btn) {
-        dom('body').on('mouseup', function(e) {
-            setTimeout(function() {
-                self.showButton(e)
-            }, 100)
-        })
-    }
+    // if (this.btn) {
+    //     dom('body').on('mouseup', function(e) {
+    //         setTimeout(function() {
+    //             self.showButton(e)
+    //         }, 100)
+    //     })
+    // }
 
     //close
     dom('body').on('mousedown', function(e) {
@@ -85,15 +84,15 @@ Bubble.prototype.show = function(e, src) {
 
     this.hideBtn()
 
-    var select = selected(e)
-
-    if (!select.text) {
-        return
-    }
-
-    if (!select.text.trim().length) {
-        return
-    }
+    // var select = selected(e)
+    //
+    // if (!select.text) {
+    //     return
+    // }
+    //
+    // if (!select.text.trim().length) {
+    //     return
+    // }
 
     // load later
     if (!this.spin.src) {
@@ -191,49 +190,50 @@ Bubble.prototype.show = function(e, src) {
 Bubble.prototype.showButton = function(e) {
     var self = this
 
+    // TODO: only have 1 icon at a time?
     if (dom('.' + this.class_wrapper).length > 0) {
         return
     }
 
-    var select = selected(e)
-
-    if (!select.text) {
-        return
-    }
-
-    if (!select.text.trim().length) {
-        return
-    }
+    // var select = selected(e)
+    //
+    // if (!select.text) {
+    //     return
+    // }
+    //
+    // if (!select.text.trim().length) {
+    //     return
+    // }
 
     //load later
-    if (!this.logo.src) {
-        self.logo.src = self.src_logo
-    }
+    // if (!this.logo.src) {
+    //     self.logo.src = self.src_logo
+    // }
 
-    var div = dom(document.createElement('div'))
-        .addClass(self.class_btn)
-        .appendTo('body')
-        .on('mousedown', function(_e) {
-            self.show(e, 'btn')
-            div.remove()
+    // var div = dom(document.createElement('div'))
+    //     .addClass(self.class_btn)
+    //     .appendTo('body')
+    //     .on('mousedown', function(_e) {
+    //         self.show(e, 'btn')
+    //         div.remove()
+    //
+    //         _e.cancelBubble = true
+    //         if (_e.stopPropagation) {
+    //             _e.stopPropagation()
+    //         }
+    //     })
 
-            _e.cancelBubble = true
-            if (_e.stopPropagation) {
-                _e.stopPropagation()
-            }
-        })
-
-    var top = e.y || e.clientY
-    var left = select.left + select.width
-
-    var style = {
-        top: top + scrolltop() + 'px',
-        left: left + scrollleft() + 'px',
-    }
-
-    div.css(style)
-
-    div.append(self.logo)
+    // var top = e.y || e.clientY
+    // var left = select.left + select.width
+    //
+    // var style = {
+    //     top: top + scrolltop() + 'px',
+    //     left: left + scrollleft() + 'px',
+    // }
+    //
+    // div.css(style)
+    //
+    // div.append(self.logo)
 }
 
 Bubble.prototype.center = function(div, select) {
