@@ -18,6 +18,7 @@
     "dependencies": {
         "bootstrap": "^4.5.3",
         "bootstrap-vue": "^2.19.0",
+        "component-dom": "^1.0.8",
         "scrollleft": "https://github.com/ddict/scrollleft",
         "scrolltop": "^0.0.1",
         "textarea-caret": "^3.1.0",

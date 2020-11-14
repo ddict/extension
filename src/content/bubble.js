@@ -1,4 +1,4 @@
-var dom = require('./dom')
+var dom = require('component-dom')
 var scrolltop = require('scrolltop')
 var scrollleft = require('scrollleft')
 var selected = require('./selected_text')
