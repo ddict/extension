@@ -13,9 +13,16 @@ ex.runtime.onMessage.addListener((request, sender, sendResponse) => {
     switch (request.channel) {
         case 'translate':
             setTimeout(() => {
+                sample.src = 'en'
+                sample.target = 'vn'
                 sendResponse(sample)
                 return
             }, 2000)
+            break
+
+        case 'tts':
+            console.log('tts', request.data)
+            sendResponse(true)
             break
 
         default:

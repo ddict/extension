@@ -135,7 +135,9 @@ function openBubble(e, select) {
     translate(select.text, data => {
         removeSpinner()
 
-        BUBBLE = bubble.create(src_speaker, data)
+        BUBBLE = bubble.create(src_speaker, data, () => {
+            tts(data)
+        })
         bubble.setLocation(BUBBLE, e, select)
     })
 }
@@ -156,4 +158,8 @@ function removeBubble() {
 
 function translate(text, cb) {
     helper.sendMsg({ channel: 'translate', data: text }, cb)
+}
+
+function tts(text) {
+    helper.sendMsg({ channel: 'tts', data: text })
 }

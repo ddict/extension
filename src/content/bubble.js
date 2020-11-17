@@ -2,6 +2,8 @@ const dom = require('component-dom')
 const scrolltop = require('scrolltop')
 const scrollleft = require('scrollleft')
 
+const helper = require('../helper')
+
 exports.create = create
 exports.remove = remove
 exports.setLocation = setLocation
@@ -11,25 +13,88 @@ const CLASS_DDICT_WRAPPER = 'ddict_div'
 const CLASS_DDICT_SPEAKER = 'ddict_audio'
 const MIN_WIDTH = 120
 
-function create(src_speaker) {
-    const speaker = new Image()
-    speaker.src = src_speaker
-
+function create(src_speaker, data, onTTS) {
     const wrapper = dom(document.createElement('div'))
         .addClass(CLASS_DDICT_WRAPPER)
         .appendTo('body')
-        .on('mousedown', function(e) {
+
+    // speaker
+    const speaker = new Image()
+    speaker.src = src_speaker
+    const speaker_wrapper = dom(speaker)
+        .addClass(CLASS_DDICT_SPEAKER)
+        .on('mousedown', e => {
+            // call background for tts
+            onTTS()
+
             // cancel another event listeners
             e.cancelBubble = true
             if (e.stopPropagation) e.stopPropagation()
         })
-
-    // spin
-    // text-align bug in ff
-    const speaker_wrapper = dom(document.createElement('p'))
-        .css('textAlign', 'center')
-        .append(speaker)
     wrapper.append(speaker_wrapper)
+
+    // translit
+    const translits = data.sentences.filter(sentence => sentence.src_translit)
+    if (translits.length > 0) {
+        const span = dom(document.createElement('span'))
+            .addClass('ddict_translit')
+            .text(translits[0].src_translit)
+
+        const p = dom(document.createElement('p'))
+        p.append(span)
+
+        wrapper.append(p)
+    }
+
+    // sentences
+    const text = data.sentences
+        .map(sentence => (sentence.trans ? sentence.trans : ''))
+        .join('')
+    wrapper.append(
+        dom(document.createElement('p'))
+            .addClass('ddict_sentence')
+            .text(text)
+    )
+
+    // dict
+    if (data.dict && data.dict.length > 0) {
+        for (dict of data.dict) {
+            wrapper.append(document.createElement('hr'))
+
+            const pos = dom(document.createElement('p'))
+                .addClass('ddict_pos')
+                .text(dict.pos)
+            const terms = dom(document.createElement('p'))
+                .addClass('ddict_terms')
+                .text(dict.terms.join(', '))
+
+            wrapper.append(pos)
+            wrapper.append(terms)
+        }
+    }
+
+    // spell
+    if (data.spell) {
+        wrapper.append(document.createElement('hr'))
+
+        const p = dom(document.createElement('p'))
+            .addClass('ddict_didumean')
+            .text('Did you mean ')
+        const spell = dom(document.createElement('span'))
+            .addClass('ddict_spell')
+            .text(data.ddict.spell)
+        p.append(spell)
+
+        wrapper.append(p)
+    }
+
+    // right to left lang
+    if (helper.isRTL(data.target)) {
+        wrapper.css({
+            'text-align': 'right',
+            direction: 'rtl',
+        })
+    }
 
     return wrapper
 }
@@ -47,9 +112,15 @@ function setLocation(el, e, select) {
         top += parseInt(el.css('line-height'), 10)
     }
 
-    el.css({
+    const style = {
         top: top + scrolltop() + 'px',
-    })
+    }
+
+    let max_width = select.width
+    max_width = max_width < MIN_WIDTH ? MIN_WIDTH : max_width
+    style.maxWidth = max_width + 'px'
+
+    el.css(style)
 
     // center
     setCenter(el, select)
@@ -73,59 +144,3 @@ function setCenter(el, select) {
         left: left + scrollleft() + 'px',
     })
 }
-
-// dom(this.tts_img)
-//     .src(opt.tts_img)
-//     .addClass('ddict_audio')
-
-// Bubble.prototype.show = function(e, src) {
-//     self.onText(select.text, src, function(data, rtl) {
-//         // remove spinner
-//         spinner.remove()
-//
-//         var max_width = select.width
-//         max_width = max_width < self.min_width ? self.min_width : max_width
-//
-//         style = {
-//             maxWidth: max_width + 'px',
-//         }
-//
-//         if (rtl) {
-//             style['text-align'] = 'right'
-//             style.direction = 'rtl'
-//         }
-//
-//         div.css(style)
-//
-//         // tts img
-//         div.append(self.tts_img)
-//
-//         // translit
-//         const translits = data.sentences.filter(
-//             sentence => sentence.src_translit
-//         )
-//         if (translits.length > 0) {
-//             const span = dom(document.createElement('span'))
-//                 .addClass('ddict_translit')
-//                 .text(translits[0].src_translit)
-//
-//             const p = dom(document.createElement('p'))
-//             p.append(span)
-//
-//             div.append(p)
-//         }
-//
-//         // sentences
-//         const text = data.sentences
-//             .map(sentence => (sentence.trans ? sentence.trans : ''))
-//             .join('')
-//         div.append(
-//             dom(document.createElement('p'))
-//                 .addClass('ddict_sentence')
-//                 .text(text)
-//         )
-//
-//         //center
-//         self.center(div, select)
-//     })
-// }
