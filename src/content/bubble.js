@@ -1,244 +1,134 @@
-var dom = require('component-dom')
-var scrolltop = require('scrolltop')
-var scrollleft = require('scrollleft')
-var selected = require('./selected_text')
+const dom = require('component-dom')
+const scrolltop = require('scrolltop')
+const scrollleft = require('scrollleft')
 
-module.exports = Bubble
+const helper = require('../helper')
 
-function Bubble(opt) {
-    if (!(this instanceof Bubble)) {
-        return new Bubble(opt)
-    }
+exports.create = create
+exports.remove = remove
+exports.setLocation = setLocation
 
-    this.min_width = opt.min_width || 120
+// const
+const CLASS_DDICT_WRAPPER = 'ddict_div'
+const CLASS_DDICT_SPEAKER = 'ddict_audio'
+const MIN_WIDTH = 120
 
-    this.dblclick = opt.dblclick
-    this.shift = opt.shift
-    this.btn = opt.btn
-
-    this.spin = new Image()
-    this.src_spin = opt.spin
-    this.logo = new Image()
-    this.src_logo = opt.logo
-    this.tts_img = new Image()
-    dom(this.tts_img)
-        .src(opt.tts_img)
-        .addClass('ddict_audio')
-
-    this.class_wrapper = 'ddict_div'
-    this.class_btn = 'ddict_btn'
-
-    var self = this
-
-    this.onText = opt.onText
-    this.onClick = opt.onClick
-
-    if (this.dblclick) {
-        dom('body').on('dblclick', function(e) {
-            self.show(e, 'dblclick')
-        })
-    }
-
-    dom('body').on('keyup', function(e) {
-        switch (e.keyCode) {
-            case 16: //shift
-                if (self.shift) {
-                    self.show(e, 'shift')
-                }
-                break
-
-            case 27: //esc
-                self.hide()
-                break
-            default:
-                break
-        }
-    })
-
-    if (this.btn) {
-        dom('body').on('mouseup', function(e) {
-            setTimeout(function() {
-                self.showButton(e)
-            }, 100)
-        })
-    }
-
-    //close
-    dom('body').on('mousedown', function(e) {
-        self.hide()
-    })
-
-    return this
-}
-
-Bubble.prototype.hide = function() {
-    dom('.' + this.class_wrapper).remove()
-    this.hideBtn()
-}
-
-Bubble.prototype.hideBtn = function() {
-    dom('.' + this.class_btn).remove()
-}
-
-Bubble.prototype.show = function(e, src) {
-    var self = this
-
-    this.hideBtn()
-
-    var select = selected(e)
-
-    if (!select.text) {
-        return
-    }
-
-    if (!select.text.trim().length) {
-        return
-    }
-
-    // load later
-    if (!this.spin.src) {
-        self.spin.src = self.src_spin
-    }
-
-    var div = dom(document.createElement('div'))
-        .addClass(self.class_wrapper)
+function create(src_speaker, data, onTTS) {
+    const wrapper = dom(document.createElement('div'))
+        .addClass(CLASS_DDICT_WRAPPER)
         .appendTo('body')
-        .on('mousedown', function(e) {
-            if (e && e.target) {
-                self.onClick(e)
-            }
 
+    // speaker
+    const speaker = new Image()
+    speaker.src = src_speaker
+    const speaker_wrapper = dom(speaker)
+        .addClass(CLASS_DDICT_SPEAKER)
+        .on('mousedown', e => {
+            // call background for tts
+            onTTS()
+
+            // cancel another event listeners
             e.cancelBubble = true
-
-            if (e.stopPropagation) {
-                e.stopPropagation()
-            }
+            if (e.stopPropagation) e.stopPropagation()
         })
+    wrapper.append(speaker_wrapper)
 
-    var top = select.bottom + 5
+    // translit
+    const translits = data.sentences.filter(sentence => sentence.src_translit)
+    if (translits.length > 0) {
+        const span = dom(document.createElement('span'))
+            .addClass('ddict_translit')
+            .text(translits[0].src_translit)
+
+        const p = dom(document.createElement('p'))
+        p.append(span)
+
+        wrapper.append(p)
+    }
+
+    // sentences
+    const text = data.sentences
+        .map(sentence => (sentence.trans ? sentence.trans : ''))
+        .join('')
+    wrapper.append(
+        dom(document.createElement('p'))
+            .addClass('ddict_sentence')
+            .text(text)
+    )
+
+    // dict
+    if (data.dict && data.dict.length > 0) {
+        for (dict of data.dict) {
+            wrapper.append(document.createElement('hr'))
+
+            const pos = dom(document.createElement('p'))
+                .addClass('ddict_pos')
+                .text(dict.pos)
+            const terms = dom(document.createElement('p'))
+                .addClass('ddict_terms')
+                .text(dict.terms.join(', '))
+
+            wrapper.append(pos)
+            wrapper.append(terms)
+        }
+    }
+
+    // spell
+    if (data.spell) {
+        wrapper.append(document.createElement('hr'))
+
+        const p = dom(document.createElement('p'))
+            .addClass('ddict_didumean')
+            .text('Did you mean ')
+        const spell = dom(document.createElement('span'))
+            .addClass('ddict_spell')
+            .text(data.ddict.spell)
+        p.append(spell)
+
+        wrapper.append(p)
+    }
+
+    // right to left lang
+    if (helper.isRTL(data.target)) {
+        wrapper.css({
+            'text-align': 'right',
+            direction: 'rtl',
+        })
+    }
+
+    return wrapper
+}
+
+function remove(el) {
+    el.remove()
+    return null
+}
+
+function setLocation(el, e, select) {
+    let top = select.bottom + 5
 
     if (select.textarea) {
         top = select.top === select.bottom ? select.top : select.bottom
-        top += parseInt(div.css('line-height'), 10)
+        top += parseInt(el.css('line-height'), 10)
     }
 
-    var style = {
+    const style = {
         top: top + scrolltop() + 'px',
     }
 
-    div.css(style)
+    let max_width = select.width
+    max_width = max_width < MIN_WIDTH ? MIN_WIDTH : max_width
+    style.maxWidth = max_width + 'px'
 
-    //text-align bug in ff
-    const spinner = dom(document.createElement('p'))
-        .css('textAlign', 'center')
-        .append(self.spin)
-    div.append(spinner)
+    el.css(style)
 
-    //center
-    self.center(div, select)
-
-    self.onText(select.text, src, function(data, rtl) {
-        // remove spinner
-        spinner.remove()
-
-        var max_width = select.width
-        max_width = max_width < self.min_width ? self.min_width : max_width
-
-        style = {
-            maxWidth: max_width + 'px',
-        }
-
-        if (rtl) {
-            style['text-align'] = 'right'
-            style.direction = 'rtl'
-        }
-
-        div.css(style)
-
-        // tts img
-        div.append(self.tts_img)
-
-        // translit
-        const translits = data.sentences.filter(
-            sentence => sentence.src_translit
-        )
-        if (translits.length > 0) {
-            const span = dom(document.createElement('span'))
-                .addClass('ddict_translit')
-                .text(translits[0].src_translit)
-
-            const p = dom(document.createElement('p'))
-            p.append(span)
-
-            div.append(p)
-        }
-
-        // sentences
-        const text = data.sentences
-            .map(sentence => (sentence.trans ? sentence.trans : ''))
-            .join('')
-        div.append(
-            dom(document.createElement('p'))
-                .addClass('ddict_sentence')
-                .text(text)
-        )
-
-        //center
-        self.center(div, select)
-    })
+    // center
+    setCenter(el, select)
 }
 
-Bubble.prototype.showButton = function(e) {
-    var self = this
-
-    if (dom('.' + this.class_wrapper).length > 0) {
-        return
-    }
-
-    var select = selected(e)
-
-    if (!select.text) {
-        return
-    }
-
-    if (!select.text.trim().length) {
-        return
-    }
-
-    //load later
-    if (!this.logo.src) {
-        self.logo.src = self.src_logo
-    }
-
-    var div = dom(document.createElement('div'))
-        .addClass(self.class_btn)
-        .appendTo('body')
-        .on('mousedown', function(_e) {
-            self.show(e, 'btn')
-            div.remove()
-
-            _e.cancelBubble = true
-            if (_e.stopPropagation) {
-                _e.stopPropagation()
-            }
-        })
-
-    var top = e.y || e.clientY
-    var left = select.left + select.width
-
-    var style = {
-        top: top + scrolltop() + 'px',
-        left: left + scrollleft() + 'px',
-    }
-
-    div.css(style)
-
-    div.append(self.logo)
-}
-
-Bubble.prototype.center = function(div, select) {
-    var left = select.left
-    var div_width = parseInt(div.css('width'), 10) + 10 // + padding
+function setCenter(el, select) {
+    let left = select.left
+    const div_width = parseInt(el.css('width'), 10) + 10 // + padding
 
     if (div_width < select.width) {
         left = left + (select.width - div_width) / 2
@@ -250,7 +140,7 @@ Bubble.prototype.center = function(div, select) {
         left = 5
     }
 
-    div.css({
+    el.css({
         left: left + scrollleft() + 'px',
     })
 }
