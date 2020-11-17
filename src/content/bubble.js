@@ -11,9 +11,9 @@ const CLASS_DDICT_WRAPPER = 'ddict_div'
 const CLASS_DDICT_SPEAKER = 'ddict_audio'
 const MIN_WIDTH = 120
 
-function create(spin_src) {
-    const spin = new Image()
-    spin.src = spin_src
+function create(src_speaker) {
+    const speaker = new Image()
+    speaker.src = src_speaker
 
     const wrapper = dom(document.createElement('div'))
         .addClass(CLASS_DDICT_WRAPPER)
@@ -26,10 +26,10 @@ function create(spin_src) {
 
     // spin
     // text-align bug in ff
-    const spinner = dom(document.createElement('p'))
+    const speaker_wrapper = dom(document.createElement('p'))
         .css('textAlign', 'center')
-        .append(spin)
-    wrapper.append(spinner)
+        .append(speaker)
+    wrapper.append(speaker_wrapper)
 
     return wrapper
 }

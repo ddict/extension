@@ -2,18 +2,19 @@ const helper = require('../helper')
 const storage = require('../storage')
 
 const selected = require('./selected_text')
-const bubble = require('./bubble')
 const icon = require('./icon')
+const spinner = require('./spinner')
+const bubble = require('./bubble')
 
 const dom = require('component-dom')
 
 // media
-const img_spin = helper.getURL('/img/spin.gif')
-const img_logo = helper.getURL('/logo/16.png')
-const img_speaker = helper.getURL('/img/audio.png')
+const src_spin = helper.getURL('/img/spin.gif')
+const src_logo = helper.getURL('/logo/16.png')
+const src_speaker = helper.getURL('/img/audio.png')
 
 // only 1 icon and bubble in lifetime
-let ICON, BUBBLE
+let ICON, SPINNER, BUBBLE
 
 // get settings
 storage.get('settings', settings => {
@@ -43,34 +44,43 @@ function init(settings) {
     // ddict icon
     if (settings.icon) {
         dom('html').on('mouseup', e => {
-            // no icon if there is bubble
-            if (BUBBLE) {
-                return
-            }
+            // we need to set delay a little bit
+            // because when bubble close
+            // the icon may show up
+            // before the selected text disapear
+            setTimeout(() => {
+                // no icon if there is bubble
+                if (SPINNER || BUBBLE) {
+                    return
+                }
 
-            check(e, true)
+                check(e, true)
+            }, 20)
         })
     }
 
     // close event
-    dom('html').on('mousedown', e => {
-        removeIcon()
-        removeBubble()
+    dom('html').on('mousedown', () => {
+        clean()
     })
 
-    // esc
     dom('html').on('keyup', e => {
         if (e && e.keyCode === 27) {
-            removeIcon()
-            removeBubble()
+            // esc
+            clean()
         }
     })
+}
+
+function clean() {
+    removeIcon()
+    removeBubble()
 }
 
 function check(e, isIcon) {
     const select = getSelectedText(e)
     if (!select) {
-        removeIcon()
+        clean()
         return
     }
 
@@ -100,7 +110,7 @@ function showIcon(e, select) {
     // remove existing icons
     removeIcon()
 
-    ICON = icon.create(img_logo, (el, _e) => {
+    ICON = icon.create(src_logo, (el, _e) => {
         removeIcon()
         openBubble(_e, select)
     })
@@ -116,11 +126,25 @@ function removeIcon() {
 }
 
 function openBubble(e, select) {
-    removeIcon()
-    removeBubble()
+    removeSpinner()
+    clean()
 
-    BUBBLE = bubble.create(img_spin)
-    bubble.setLocation(BUBBLE, e, select)
+    SPINNER = spinner.create(src_spin)
+    spinner.setLocation(SPINNER, e, select)
+
+    translate(select.text, data => {
+        removeSpinner()
+
+        BUBBLE = bubble.create(src_speaker, data)
+        bubble.setLocation(BUBBLE, e, select)
+    })
+}
+
+function removeSpinner() {
+    if (SPINNER) {
+        spinner.remove(SPINNER)
+        SPINNER = null
+    }
 }
 
 function removeBubble() {

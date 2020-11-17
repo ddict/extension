@@ -10,9 +10,9 @@ exports.setLocation = setLocation
 const CLASS_DDICT_BTN = 'ddict_btn'
 
 // return icon dom
-function create(logo_src, onClick) {
+function create(src_icon, onClick) {
     const icon = new Image()
-    icon.src = logo_src
+    icon.src = src_icon
 
     // create img wrapper and set the click event
     const wrapper = dom(document.createElement('div'))
