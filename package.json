@@ -18,6 +18,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "@ddict/translate": "^0.0.1",
         "bootstrap": "^4.5.3",
         "bootstrap-vue": "^2.19.0",
         "component-dom": "^1.0.8",

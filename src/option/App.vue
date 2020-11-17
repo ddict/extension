@@ -1,5 +1,26 @@
 <template>
     <div class="text-left">
+        <hr />
+
+        <div class="form-row">
+            <div class="col">
+                <select v-model="src" class="form-control">
+                    <option v-for="(value, key) in sl" :value="key">
+                        {{ value }}
+                    </option>
+                </select>
+            </div>
+            <div class="col">
+                <select v-model="target" class="form-control">
+                    <option v-for="(value, key) in tl" :value="key">
+                        {{ value }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <hr />
+
         <div class="form-group form-check">
             <input
                 v-model="icon"
@@ -52,7 +73,7 @@
             </label>
         </div>
 
-        <br />
+        <hr />
 
         <button class="btn btn-lg btn-secondary btn-block" @click="close()">
             Close
@@ -61,6 +82,8 @@
 </template>
 
 <script>
+const translate = require('@ddict/translate')
+
 const helper = require('../helper')
 const storage = require('../storage')
 
@@ -75,14 +98,22 @@ const DEFAULT_SETTINGS = {
 module.exports = {
     data() {
         return {
+            src: 'auto',
+            target: 'vi',
             icon: false,
             dbclick: false,
             shift: false,
             tts: false,
+
+            sl: {},
+            tl: {},
         }
     },
     watch: {
-        icon() {
+        src() {
+            this.save()
+        },
+        target() {
             this.save()
         },
         dbclick() {
@@ -95,22 +126,54 @@ module.exports = {
             this.save()
         },
     },
-    created() {
-        this.load(settings => {
-            if (!settings) settings = DEFAULT_SETTINGS
+    async created() {
+        this.load(async settings => {
+            if (settings) {
+                const languages = await this.getLanguages(settings.target)
+                this.sl = languages.sl
+                this.tl = languages.tl
 
-            this.icon = settings.icon
-            this.dbclick = settings.dbclick
-            this.shift = settings.shift
-            this.tts = settings.tts
+                this.src = settings.src
+                this.target = settings.target
+                this.dbclick = settings.dbclick
+                this.shift = settings.shift
+                this.tts = settings.tts
+                return
+            }
+
+            settings = DEFAULT_SETTINGS
         })
     },
     methods: {
+        async getUserCountry() {
+            // TODO: handle error
+            const rq = translate.google.getUserCountry()
+            const res = await fetch(rq.url, {
+                method: rq.method,
+                headers: rq.headers,
+            })
+
+            const country = res.json()
+            const code = language.mapLangFromCode(country.country)
+            return code
+        },
+        async getLanguages(locale) {
+            // TODO: handle error
+            const rq = translate.google.getLanguages(locale)
+            const res = await fetch(rq.url, {
+                method: rq.method,
+                headers: rq.headers,
+            })
+            const languages = res.json()
+            return languages
+        },
         close() {
             helper.closeTab()
         },
         save() {
             storage.set(LABEL_SETTINGS, {
+                src: this.src,
+                target: this.target,
                 icon: this.icon,
                 dbclick: this.dbclick,
                 shift: this.shift,
