@@ -5,14 +5,14 @@
         <div class="form-row">
             <div class="col">
                 <select v-model="src" class="form-control">
-                    <option v-for="(value, key) in sl" :value="key">
+                    <option v-for="(value, key) in sl" :key="key" :value="key">
                         {{ value }}
                     </option>
                 </select>
             </div>
             <div class="col">
                 <select v-model="target" class="form-control">
-                    <option v-for="(value, key) in tl" :value="key">
+                    <option v-for="(value, key) in tl" :key="key" :value="key">
                         {{ value }}
                     </option>
                 </select>
@@ -82,13 +82,14 @@
 </template>
 
 <script>
-const translate = require('@ddict/translate')
-
 const helper = require('../helper')
 const storage = require('../storage')
+const google = require('../google')
 
 const LABEL_SETTINGS = 'settings'
 const DEFAULT_SETTINGS = {
+    src: 'auto',
+    target: 'vi',
     icon: true,
     dbclick: true,
     shift: true,
@@ -127,46 +128,26 @@ module.exports = {
         },
     },
     async created() {
-        this.load(async settings => {
-            if (settings) {
-                const languages = await this.getLanguages(settings.target)
-                this.sl = languages.sl
-                this.tl = languages.tl
+        const code = await google.getUserCountry()
+        const languages = await google.getLanguages(code)
+        this.sl = languages.sl
+        this.tl = languages.tl
 
-                this.src = settings.src
-                this.target = settings.target
-                this.dbclick = settings.dbclick
-                this.shift = settings.shift
-                this.tts = settings.tts
-                return
+        this.load(settings => {
+            if (!settings) {
+                settings = DEFAULT_SETTINGS
             }
 
-            settings = DEFAULT_SETTINGS
+            this.src = settings.src
+            this.target = settings.target
+            this.icon = settings.icon
+            this.dbclick = settings.dbclick
+            this.shift = settings.shift
+            this.tts = settings.tts
+            return
         })
     },
     methods: {
-        async getUserCountry() {
-            // TODO: handle error
-            const rq = translate.google.getUserCountry()
-            const res = await fetch(rq.url, {
-                method: rq.method,
-                headers: rq.headers,
-            })
-
-            const country = res.json()
-            const code = language.mapLangFromCode(country.country)
-            return code
-        },
-        async getLanguages(locale) {
-            // TODO: handle error
-            const rq = translate.google.getLanguages(locale)
-            const res = await fetch(rq.url, {
-                method: rq.method,
-                headers: rq.headers,
-            })
-            const languages = res.json()
-            return languages
-        },
         close() {
             helper.closeTab()
         },
