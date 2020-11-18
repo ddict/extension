@@ -1,5 +1,26 @@
 <template>
     <div class="text-left">
+        <hr />
+
+        <div class="form-row">
+            <div class="col">
+                <select v-model="src" class="form-control">
+                    <option v-for="(value, key) in sl" :key="key" :value="key">
+                        {{ value }}
+                    </option>
+                </select>
+            </div>
+            <div class="col">
+                <select v-model="target" class="form-control">
+                    <option v-for="(value, key) in tl" :key="key" :value="key">
+                        {{ value }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <hr />
+
         <div class="form-group form-check">
             <input
                 v-model="icon"
@@ -52,7 +73,7 @@
             </label>
         </div>
 
-        <br />
+        <hr />
 
         <button class="btn btn-lg btn-secondary btn-block" @click="close()">
             Close
@@ -63,9 +84,12 @@
 <script>
 const helper = require('../helper')
 const storage = require('../storage')
+const google = require('../google')
 
 const LABEL_SETTINGS = 'settings'
 const DEFAULT_SETTINGS = {
+    src: 'auto',
+    target: 'vi',
     icon: true,
     dbclick: true,
     shift: true,
@@ -75,14 +99,22 @@ const DEFAULT_SETTINGS = {
 module.exports = {
     data() {
         return {
+            src: 'auto',
+            target: 'vi',
             icon: false,
             dbclick: false,
             shift: false,
             tts: false,
+
+            sl: {},
+            tl: {},
         }
     },
     watch: {
-        icon() {
+        src() {
+            this.save()
+        },
+        target() {
             this.save()
         },
         dbclick() {
@@ -95,14 +127,24 @@ module.exports = {
             this.save()
         },
     },
-    created() {
-        this.load(settings => {
-            if (!settings) settings = DEFAULT_SETTINGS
+    async created() {
+        const code = await google.getUserCountry()
+        const languages = await google.getLanguages(code)
+        this.sl = languages.sl
+        this.tl = languages.tl
 
+        this.load(settings => {
+            if (!settings) {
+                settings = DEFAULT_SETTINGS
+            }
+
+            this.src = settings.src
+            this.target = settings.target
             this.icon = settings.icon
             this.dbclick = settings.dbclick
             this.shift = settings.shift
             this.tts = settings.tts
+            return
         })
     },
     methods: {
@@ -111,6 +153,8 @@ module.exports = {
         },
         save() {
             storage.set(LABEL_SETTINGS, {
+                src: this.src,
+                target: this.target,
                 icon: this.icon,
                 dbclick: this.dbclick,
                 shift: this.shift,
