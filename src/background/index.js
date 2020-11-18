@@ -6,7 +6,8 @@ const sample = require('../sample')
 // on install or update. check the details for more info
 ex.runtime.onInstalled.addListener(() => {
     // open option page to set default settings
-    helper.openTab(helper.getURL('/option/index.html'))
+    // helper.openTab(helper.getURL('/option/index.html'))
+    helper.openTab(helper.getURL('/popup/index.html'))
 })
 
 ex.runtime.onMessage.addListener((request, sender, sendResponse) => {
