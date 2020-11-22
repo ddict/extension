@@ -18,7 +18,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
-        "@ddict/popup": "^0.1.0",
+        "@ddict/popup": "^0.1.5",
         "@ddict/translate": "^0.0.1",
         "bootstrap": "^4.5.3",
         "bootstrap-vue": "^2.19.0",
@@ -29,5 +29,7 @@
         "vue": "~2",
         "vue-router": "^3.1.6"
     },
-    "browserslist": ["last 1 Chrome versions"]
+    "browserslist": [
+        "last 1 Chrome versions"
+    ]
 }

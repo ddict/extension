@@ -873,15 +873,15 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@ddict/popup@^0.1.0":
-  version "0.1.0"
-  resolved "https://npm.pkg.github.com/download/@ddict/popup/0.1.0/2dc08bf294e698a50d42446693d1accc85836b5004efd7e427d378d5e08a1aab#6f7bd54a8ded26d5296232f955490e5a7479d22c"
-  integrity sha512-+nuy0IUOnw4uDdyg2QK8MiVo3C5xv6OFsC5pS/E8g66IGdWO921wvAdKLUoc60cflS5mTkqjrjRysQfH0ZGisw==
+"@ddict/popup@^0.1.5":
+  version "0.1.5"
+  resolved "https://npm.pkg.github.com/download/@ddict/popup/0.1.5/f6c0da62cd48b39f50130c4560250a80e7b4d91f3384297bc1644fbe73e1acff#d1c0ee5e0bcf0010ef0988fcee9aeb07f3e4ddb0"
+  integrity sha512-S332hb+xaI0LrWf3VrVD0C2EH6LuB7W4k+m10y8bDH4CWffslXuViGB6qskyN8wt0SnB+V41bNxEXVTvTlHi6g==
   dependencies:
-    "@fortawesome/fontawesome-svg-core" "^1.2.2"
-    "@fortawesome/free-solid-svg-icons" "^5.2.0"
-    "@fortawesome/vue-fontawesome" "^0.1.1"
-    bootstrap-vue "^2.0.0-rc.11"
+    "@fortawesome/fontawesome-svg-core" "^1.2.32"
+    "@fortawesome/free-solid-svg-icons" "^5.15.1"
+    "@fortawesome/vue-fontawesome" "^2.0.0"
+    bootstrap-vue "^2.19.0"
     vue "^2.5.16"
 
 "@ddict/translate@^0.0.1":
@@ -913,24 +913,24 @@
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.32.tgz#3436795d5684f22742989bfa08f46f50f516f259"
   integrity sha512-ux2EDjKMpcdHBVLi/eWZynnPxs0BtFVXJkgHIxXRl+9ZFaHPvYamAfCzeeQFqHRjuJtX90wVnMRaMQAAlctz3w==
 
-"@fortawesome/fontawesome-svg-core@^1.2.2":
+"@fortawesome/fontawesome-svg-core@^1.2.32":
   version "1.2.32"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-1.2.32.tgz#da092bfc7266aa274be8604de610d7115f9ba6cf"
   integrity sha512-XjqyeLCsR/c/usUpdWcOdVtWFVjPbDFBTQkn2fQRrWhhUoxriQohO2RWDxLyUM8XpD+Zzg5xwJ8gqTYGDLeGaQ==
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.32"
 
-"@fortawesome/free-solid-svg-icons@^5.2.0":
+"@fortawesome/free-solid-svg-icons@^5.15.1":
   version "5.15.1"
   resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-5.15.1.tgz#e1432676ddd43108b41197fee9f86d910ad458ef"
   integrity sha512-EFMuKtzRMNbvjab/SvJBaOOpaqJfdSap/Nl6hst7CgrJxwfORR1drdTV6q1Ib/JVzq4xObdTDcT6sqTaXMqfdg==
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.32"
 
-"@fortawesome/vue-fontawesome@^0.1.1":
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/@fortawesome/vue-fontawesome/-/vue-fontawesome-0.1.10.tgz#eeeec1e4e8850bed0468f938292b06cda793bf34"
-  integrity sha512-b2+SLF31h32LSepVcXe+BQ63yvbq5qmTCy4KfFogCYm2bn68H5sDWUnX+U7MBqnM2aeEk9M7xSoqGnu+wSdY6w==
+"@fortawesome/vue-fontawesome@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/vue-fontawesome/-/vue-fontawesome-2.0.0.tgz#63da3e459147cebb0a8d58eed81d6071db9f5973"
+  integrity sha512-N3VKw7KzRfOm8hShUVldpinlm13HpvLBQgT63QS+aCrIRLwjoEUXY5Rcmttbfb6HkzZaeqjLqd/aZCQ53UjQpg==
 
 "@iarna/toml@^2.2.0":
   version "2.2.5"
@@ -1326,7 +1326,7 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
-bootstrap-vue@^2.0.0-rc.11, bootstrap-vue@^2.19.0:
+bootstrap-vue@^2.19.0:
   version "2.19.0"
   resolved "https://registry.yarnpkg.com/bootstrap-vue/-/bootstrap-vue-2.19.0.tgz#5019df48251e552a5c34da57fc97dabebd53b02f"
   integrity sha512-IjAXUSrRU5Qu9x3uwUcoj6LtysKbCVeWoJOsODyI/WokStUr95M+tTIajXUjIrB/Nsk0fS+RNvZnm2sWeNFrhg==

@@ -1,5 +1,5 @@
 <template>
-    <app-popup :export_data="data"
+    <Popup :export_data="data"
                :export_select="select"
                :export_tts="tts"
                @srctarget="srctarget"
@@ -7,20 +7,12 @@
 </template>
 
 <script>
-import popup from '@ddict/popup'
-
 const helper = require('../helper')
 const storage = require('../storage')
 const google = require('../google')
 
-// testing purpose
-const sample_tts_url = 'http://www.jingle.org/westwood8.mp3'
-
 export default {
     name: 'Test',
-    components: {
-        appPopup: popup,
-    },
     data() {
         return {
             data: null,
@@ -71,10 +63,21 @@ export default {
                 this.data.ddictTarget = this.select.targets[data.target]
 
                 // generate tts urls
-                this.tts = {
-                    src: [sample_tts_url],
-                    target: [sample_tts_url, sample_tts_url, sample_tts_url],
-                }
+                helper.sendMsg({ channel: 'tts_urls', data: {
+                    src: this.data.src,
+                    target: this.data.target,
+                    src_text: text,
+                    target_text: this.data.sentences
+                        .map(sentence => (sentence.trans ? sentence.trans : ''))
+                        .join(''),
+
+                } }, res => {
+
+                    this.tts = {
+                        src: res.src_urls,
+                        target: res.target_urls,
+                    }
+                })
             })
         },
         srctarget(select) {
