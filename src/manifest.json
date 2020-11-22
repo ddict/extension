@@ -11,6 +11,8 @@
         }
     },
     "permissions": [
+        "webRequest",
+        "webRequestBlocking",
         "storage",
         "notifications",
         "contextMenus",
@@ -20,7 +22,7 @@
         "http://*.ddict.me/*"
     ],
     "background": {
-        "scripts": ["/background/index.js"]
+        "scripts": ["/background/listeners.js", "/background/index.js"]
     },
     "options_ui": {
         "page": "/option/index.html",
