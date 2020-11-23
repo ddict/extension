@@ -13,7 +13,7 @@ const CLASS_DDICT_WRAPPER = 'ddict_div'
 const CLASS_DDICT_SPEAKER = 'ddict_audio'
 const MIN_WIDTH = 120
 
-function create(src_speaker, data, onTTS) {
+function create(src_speaker, data, onTTS, onSpell) {
     const wrapper = dom(document.createElement('div'))
         .addClass(CLASS_DDICT_WRAPPER)
         .appendTo('body')
@@ -74,7 +74,7 @@ function create(src_speaker, data, onTTS) {
     }
 
     // spell
-    if (data.spell) {
+    if (data.spell && data.spell.spell_res) {
         wrapper.append(document.createElement('hr'))
 
         const p = dom(document.createElement('p'))
@@ -82,7 +82,14 @@ function create(src_speaker, data, onTTS) {
             .text('Did you mean ')
         const spell = dom(document.createElement('span'))
             .addClass('ddict_spell')
-            .text(data.ddict.spell)
+            .text(data.spell.spell_res)
+            .on('mousedown', e => {
+                onSpell(data.spell.spell_res)
+
+                // cancel another event listeners
+                e.cancelBubble = true
+                if (e.stopPropagation) e.stopPropagation()
+            })
         p.append(spell)
 
         wrapper.append(p)

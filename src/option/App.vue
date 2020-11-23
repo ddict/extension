@@ -99,6 +99,8 @@ const DEFAULT_SETTINGS = {
 module.exports = {
     data() {
         return {
+            lang: 'en',
+
             src: 'auto',
             target: 'vi',
             icon: false,
@@ -128,8 +130,9 @@ module.exports = {
         },
     },
     async created() {
-        const code = await google.getUserCountry()
-        const languages = await google.getLanguages(code)
+        const lang = await google.getUserCountry()
+        const languages = await google.getLanguages(lang)
+        this.lang = lang
         this.sl = languages.sl
         this.tl = languages.tl
 
@@ -153,6 +156,7 @@ module.exports = {
         },
         save() {
             storage.set(LABEL_SETTINGS, {
+                lang: this.lang,
                 src: this.src,
                 target: this.target,
                 icon: this.icon,

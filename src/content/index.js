@@ -135,9 +135,17 @@ function openBubble(e, select) {
     translate(select.text, data => {
         removeSpinner()
 
-        BUBBLE = bubble.create(src_speaker, data, () => {
-            tts(data)
-        })
+        BUBBLE = bubble.create(
+            src_speaker,
+            data,
+            () => {
+                tts(select.text, data.src)
+            },
+            spell => {
+                // TODO: spell clickable
+                console.log(spell)
+            }
+        )
         bubble.setLocation(BUBBLE, e, select)
     })
 }
@@ -160,6 +168,12 @@ function translate(text, cb) {
     helper.sendMsg({ channel: 'translate', data: text }, cb)
 }
 
-function tts(text) {
-    helper.sendMsg({ channel: 'tts', data: text })
+function tts(text, src) {
+    helper.sendMsg({
+        channel: 'tts_content',
+        data: {
+            text: text,
+            src: src,
+        },
+    })
 }

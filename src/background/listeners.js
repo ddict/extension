@@ -5,18 +5,20 @@ const DDICT_HEADER = 'GoogleTranslate/Ddict.me'
 // Given a UserAgent object, will replace the "User-Agent" header in the
 // map provided as requestHeaders.
 function replaceHeader(requestHeaders) {
-    console.log(requestHeaders)
-    return requestHeaders
-
-    var newHeaders = []
-    for (var i = 0; i < requestHeaders.length; i++) {
+    const newHeaders = []
+    let isDdict = false
+    for (let i = 0; i < requestHeaders.length; i++) {
+        if (requestHeaders[i].name === 'ddict') {
+            isDdict = true
+        }
         if (requestHeaders[i].name != 'User-Agent') {
             newHeaders.push(requestHeaders[i])
         } else {
             newHeaders.push({ name: 'User-Agent', value: DDICT_HEADER })
         }
     }
-    return newHeaders
+
+    return isDdict ? newHeaders : requestHeaders
 }
 
 // Adds listeners that handle modifying headers on any request that comes through.
@@ -27,7 +29,7 @@ function updateListeners() {
         listener = function(details) {
             // We only want to modify requests that have a URL, and that have headers.
             // Any others are not interesting enough to have their headers modified.
-            var header_map = { requestHeaders: details.requestHeaders }
+            let header_map = { requestHeaders: details.requestHeaders }
             if (
                 details &&
                 details.url &&
@@ -48,5 +50,5 @@ function updateListeners() {
     )
 }
 
-var listener = null
+let listener = null
 updateListeners()
