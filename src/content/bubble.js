@@ -58,7 +58,7 @@ function create(src_speaker, data, onTTS, onSpell) {
 
     // dict
     if (data.dict && data.dict.length > 0) {
-        for (dict of data.dict) {
+        for (const dict of data.dict) {
             wrapper.append(document.createElement('hr'))
 
             const pos = dom(document.createElement('p'))

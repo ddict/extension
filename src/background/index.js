@@ -4,14 +4,14 @@ const helper = require('../helper')
 const storage = require('../storage')
 const google = require('../google')
 
+const ERROR_LABEL =
+    'There is an issue with the Google Translate server. Please contact me at https://ddict.me'
+
 // on install or update. check the details for more info
 ex.runtime.onInstalled.addListener(() => {
     // open option page to set default settings
     helper.openTab(helper.getURL('/option/index.html'))
 })
-
-// testing purpose
-const sample_tts_url = 'http://www.jingle.org/westwood8.mp3'
 
 ex.runtime.onMessage.addListener((request, sender, sendResponse) => {
     switch (request.channel) {
@@ -64,7 +64,7 @@ function translate(text, cb) {
             data.target = settings.target
             cb(data)
         } catch (err) {
-            alert(err)
+            alert(ERROR_LABEL)
             cb({})
         }
     })
@@ -76,7 +76,7 @@ function tts(text, target, cb) {
             const url = await google.tts(settings.lang, text, target)
             cb(url)
         } catch (err) {
-            alert(err)
+            alert(ERROR_LABEL)
             cb()
         }
     })

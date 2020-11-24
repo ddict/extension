@@ -2,6 +2,7 @@
     "name": "@ddict/extension",
     "version": "0.0.1",
     "scripts": {
+        "lint": "eslint src/",
         "watch": "parcel watch src/manifest.json --no-hmr",
         "build": "rm -r build; NODE_ENV=production parcel build src/manifest.json -d build --no-source-maps"
     },

@@ -3,7 +3,7 @@ const textarea = require('textarea-caret')
 module.exports = SelectedText
 
 function SelectedText(event) {
-    var selected_range, selected_rect, top, bottom, left, width, height
+    var selected_range, selected_rect, top, bottom, left, width // , height
 
     var selected = window.getSelection()
 
@@ -30,7 +30,7 @@ function SelectedText(event) {
         bottom = selected_rect.bottom
         left = selected_rect.left
         width = selected_rect.width
-        height = selected_rect.height
+        // height = selected_rect.height
     }
 
     if (!bottom && !left) {
