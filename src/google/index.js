@@ -4,6 +4,7 @@ const Translate = require('@ddict/translate')
 const default_languages = require('./languages')
 
 const DDICT_HEADER = 'https://ddict.me'
+const MAX_LENGTH = 5000
 
 exports.getUserCountry = getUserCountry
 exports.getLanguages = getLanguages
@@ -46,6 +47,11 @@ async function getLanguages(code) {
 }
 
 async function translate(lang = 'en', text, src, target) {
+    if (text.length > MAX_LENGTH) {
+        alert(`Maximum text length exceeded: ${MAX_LENGTH}`)
+        return {}
+    }
+
     const rq = Translate.google.translate(lang, text, src, target)
 
     // to tell extension header listener to enable the custom user-agent

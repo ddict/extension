@@ -884,10 +884,10 @@
     bootstrap-vue "^2.19.0"
     vue "^2.5.16"
 
-"@ddict/translate@^0.0.1":
-  version "0.0.1"
-  resolved "https://npm.pkg.github.com/download/@ddict/translate/0.0.1/c2ec55ddbc9816639a7fb12d6c3a66a2c69e28f312986d3aa8a7700af61a0ad9#b70d70e9cce1f09a1377ae4ac2e7ac8d54ea5d96"
-  integrity sha512-AiGzhL8QVceztKM+8xb3w6hpI86ebntI8mXloDiuokgxgZ3JqpTuVOSAUYUx1Mtic3eZ+P0yFecg6+AJk5PiAw==
+"@ddict/translate@^0.0.2":
+  version "0.0.2"
+  resolved "https://npm.pkg.github.com/download/@ddict/translate/0.0.2/d3e8b535d9182ee81f7ff1895a2ecf961d31d8e5f831da6eb34d2df3f24b9358#b64af51db5c6f56409bb81aae3c8557a29d8c77f"
+  integrity sha512-6wWKmD0Ttzjuo3FpFxLpTRCTGDEZSJJivNQuAdSv5R51U5XUK1xxOm4EveUmA36ZdsaDaR9yjyQz1GUMJJyk5Q==
   dependencies:
     country-data "0.0.31"
     qs "^6.5.2"
