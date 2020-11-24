@@ -69,7 +69,7 @@
                 id="tts"
             />
             <label class="form-check-label" for="tts">
-                Auto Speak/TTS
+                Auto Speak/TTS on Dictionary.
             </label>
         </div>
 

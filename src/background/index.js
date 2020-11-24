@@ -16,8 +16,15 @@ ex.runtime.onInstalled.addListener(() => {
 ex.runtime.onMessage.addListener((request, sender, sendResponse) => {
     switch (request.channel) {
         case 'translate':
-            translate(request.data, data => {
+            translate(request.data, (data, autoTTS) => {
                 sendResponse(data)
+
+                // auto tts & dictionary
+                if (autoTTS && data.dict) {
+                    tts(request.data, data.src, url => {
+                        play(url)
+                    })
+                }
             })
             break
 
@@ -62,7 +69,7 @@ function translate(text, cb) {
             )
 
             data.target = settings.target
-            cb(data)
+            cb(data, settings.tts)
         } catch (err) {
             alert(ERROR_LABEL)
             cb({})
