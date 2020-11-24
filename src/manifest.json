@@ -1,6 +1,6 @@
 {
     "name": "Ddict Translate: Translator - Dictionary",
-    "version": "4.0.0",
+    "version": "4.0.1",
     "description": "Ddict helps you instantly translate text on websites by a double click or a keypress.",
     "manifest_version": 2,
     "commands": {
@@ -22,7 +22,7 @@
         "http://*.ddict.me/*"
     ],
     "background": {
-        "scripts": ["/background/listeners.js", "/background/index.js"]
+        "scripts": ["/background/listeners.js", "/background/index.js", "/background/ga.js"]
     },
     "options_ui": {
         "page": "/option/index.html",
