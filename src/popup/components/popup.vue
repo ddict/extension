@@ -84,7 +84,7 @@ export default {
                     data: {
                         src: data.src,
                         target: data.target,
-                        src_text: text,
+                        src_text: data.text,
                         target_text: data.sentences
                             .map(sentence =>
                                 sentence.trans ? sentence.trans : ''

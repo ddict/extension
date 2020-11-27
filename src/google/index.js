@@ -63,23 +63,27 @@ async function translate(lang = 'en', text, src, target) {
     })
 
     const data = await res.json()
+    // inject for more info
+    data.text = text
+    data.target = target
+    
     return data
 }
 
 async function tts(lang = 'en', text, target) {
     const rq = Translate.google.tts(lang, text, 'input', target)
-    return rq.url
+    // return rq.url
 
     // enable below if google require their header for tts
     
     // to tell extension header listener to enable the custom user-agent
-    // rq.headers.ddict = DDICT_HEADER
+    rq.headers.ddict = DDICT_HEADER
 
-    // const res = await fetch(rq.url, {
-    //     method: rq.method,
-    //     headers: rq.headers,
-    // })
+    const res = await fetch(rq.url, {
+        method: rq.method,
+        headers: rq.headers,
+    })
 
-    // const data = await res.blob()
-    // return URL.createObjectURL(data)
+    const data = await res.blob()
+    return URL.createObjectURL(data)
 }

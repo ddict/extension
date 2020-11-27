@@ -19,11 +19,8 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
-        "@ddict/popup": "^0.1.6",
+        "@ddict/popup": "^0.1.9",
         "@ddict/translate": "^0.0.2",
-        "@fortawesome/fontawesome-svg-core": "^1.2.32",
-        "@fortawesome/free-solid-svg-icons": "^5.15.1",
-        "@fortawesome/vue-fontawesome": "^2.0.0",
         "bootstrap": "^4.5.3",
         "bootstrap-vue": "^2.19.0",
         "component-dom": "^1.0.8",

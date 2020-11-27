@@ -873,10 +873,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@ddict/popup@^0.1.6":
-  version "0.1.6"
-  resolved "https://npm.pkg.github.com/download/@ddict/popup/0.1.6/24b6757aa95a28d049edf88027c0c544dbaa35cf65377913f48f0e81b6c27dd9#cb0545276b3f8908bb134fbb80a1c4980c28a851"
-  integrity sha512-yFbjKfpMLN87rVp4apuAqMpcExhomoIEcZFJts1007mIYdyyIxza4q7csaQkvxOW4Pp4dQPC5H+JwdlBatOLVQ==
+"@ddict/popup@^0.1.9":
+  version "0.1.9"
+  resolved "https://npm.pkg.github.com/download/@ddict/popup/0.1.9/efb7534a6e9ee7c295bcab38bf775b81b4a2bfd8d044ff181989466b1802a43f#e1c9c71fdd93d51c7ebbc39d8db381ba35bfa1f6"
+  integrity sha512-ZnahELNaHNJJ63SbhsUxlTmGD5iZylMB4QV2kxUT4uKEWOAT1cpxyDYTaRP/kD8yqP74bpoKpD17vCDfgHaxMw==
   dependencies:
     vue "^2.5.16"
 
@@ -903,30 +903,6 @@
     lodash "^4.17.19"
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
-
-"@fortawesome/fontawesome-common-types@^0.2.32":
-  version "0.2.32"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.32.tgz#3436795d5684f22742989bfa08f46f50f516f259"
-  integrity sha512-ux2EDjKMpcdHBVLi/eWZynnPxs0BtFVXJkgHIxXRl+9ZFaHPvYamAfCzeeQFqHRjuJtX90wVnMRaMQAAlctz3w==
-
-"@fortawesome/fontawesome-svg-core@^1.2.32":
-  version "1.2.32"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-1.2.32.tgz#da092bfc7266aa274be8604de610d7115f9ba6cf"
-  integrity sha512-XjqyeLCsR/c/usUpdWcOdVtWFVjPbDFBTQkn2fQRrWhhUoxriQohO2RWDxLyUM8XpD+Zzg5xwJ8gqTYGDLeGaQ==
-  dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.32"
-
-"@fortawesome/free-solid-svg-icons@^5.15.1":
-  version "5.15.1"
-  resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-5.15.1.tgz#e1432676ddd43108b41197fee9f86d910ad458ef"
-  integrity sha512-EFMuKtzRMNbvjab/SvJBaOOpaqJfdSap/Nl6hst7CgrJxwfORR1drdTV6q1Ib/JVzq4xObdTDcT6sqTaXMqfdg==
-  dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.32"
-
-"@fortawesome/vue-fontawesome@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@fortawesome/vue-fontawesome/-/vue-fontawesome-2.0.0.tgz#63da3e459147cebb0a8d58eed81d6071db9f5973"
-  integrity sha512-N3VKw7KzRfOm8hShUVldpinlm13HpvLBQgT63QS+aCrIRLwjoEUXY5Rcmttbfb6HkzZaeqjLqd/aZCQ53UjQpg==
 
 "@iarna/toml@^2.2.0":
   version "2.2.5"

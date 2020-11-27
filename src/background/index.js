@@ -11,6 +11,7 @@ const ERROR_LABEL =
 ex.runtime.onInstalled.addListener(() => {
     // open option page to set default settings
     helper.openTab(helper.getURL('/option/index.html'))
+    helper.openTab('https://ddict.me')
 })
 
 ex.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -68,7 +69,6 @@ function translate(text, cb) {
                 settings.target
             )
 
-            data.target = settings.target
             cb(data, settings.tts)
         } catch (err) {
             alert(ERROR_LABEL)
