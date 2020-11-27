@@ -69,6 +69,9 @@ function translate(text, cb) {
                 settings.target
             )
 
+            // save for history
+            storage.set('last_word', data)
+
             cb(data, settings.tts)
         } catch (err) {
             alert(ERROR_LABEL)

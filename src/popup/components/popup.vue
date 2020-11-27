@@ -38,6 +38,12 @@ export default {
                 srcs: languages.sl,
                 targets: languages.tl,
             }
+
+            // load history
+            storage.get('last_word', data => {
+                if (!data) return
+                this.loadData(data)
+            })
         })
     },
     methods: {
