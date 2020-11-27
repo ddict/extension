@@ -51,11 +51,15 @@ function create(src_speaker, data, onTTS, onSpell) {
     const text = data.sentences
         .map(sentence => (sentence.trans ? sentence.trans : ''))
         .join('')
-    wrapper.append(
-        dom(document.createElement('p'))
-            .addClass('ddict_sentence')
-            .text(text)
-    )
+
+    // break newline
+    for (const line of text.split('\n')) {
+        wrapper.append(
+            dom(document.createElement('p'))
+                .addClass('ddict_sentence')
+                .text(line)
+        )
+    }
 
     // dict
     if (data.dict && data.dict.length > 0) {
