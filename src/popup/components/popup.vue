@@ -57,40 +57,46 @@ export default {
                     data: text,
                 },
                 data => {
-                    this.data = data
+                    this.loadData(data)
+                }
+            )
+        },
+        loadData(data) {
+            this.data = data
+                // set data src and target
+                if (!Object.prototype.hasOwnProperty.call(data, 'src')) {
+                    this.data.src = this.select.src
+                }
+                if (!Object.prototype.hasOwnProperty.call(data, 'target')) {
+                    this.data.target = this.select.target
+                }
+                this.data.ddictSrc = this.select.srcs[data.src]
+                this.data.ddictTarget = this.select.targets[data.target]
 
-                    // set data src and target
-                    if (!Object.prototype.hasOwnProperty.call(data, 'src')) {
-                        this.data.src = this.select.src
+                // generate tts urls
+                this.getTTS(this.data)
+                
+        },
+        getTTS(data) {
+            helper.sendMsg(
+                {
+                    channel: 'tts_popup',
+                    data: {
+                        src: data.src,
+                        target: data.target,
+                        src_text: text,
+                        target_text: data.sentences
+                            .map(sentence =>
+                                sentence.trans ? sentence.trans : ''
+                            )
+                            .join(''),
+                    },
+                },
+                res => {
+                    this.tts = {
+                        src: res.src_urls,
+                        target: res.target_urls,
                     }
-                    if (!Object.prototype.hasOwnProperty.call(data, 'target')) {
-                        this.data.target = this.select.target
-                    }
-                    this.data.ddictSrc = this.select.srcs[data.src]
-                    this.data.ddictTarget = this.select.targets[data.target]
-
-                    // generate tts urls
-                    helper.sendMsg(
-                        {
-                            channel: 'tts_popup',
-                            data: {
-                                src: this.data.src,
-                                target: this.data.target,
-                                src_text: text,
-                                target_text: this.data.sentences
-                                    .map(sentence =>
-                                        sentence.trans ? sentence.trans : ''
-                                    )
-                                    .join(''),
-                            },
-                        },
-                        res => {
-                            this.tts = {
-                                src: res.src_urls,
-                                target: res.target_urls,
-                            }
-                        }
-                    )
                 }
             )
         },
