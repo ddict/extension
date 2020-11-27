@@ -1,5 +1,12 @@
 <template>
     <div class="text-left">
+        <div class="text-right">
+            <select v-model="code">
+                <option v-for="code in countries" :key="code" :value="code">
+                    {{ flag(code) }}
+                </option>
+            </select>
+        </div>
         <hr />
 
         <div class="form-row">
@@ -82,12 +89,16 @@
 </template>
 
 <script>
+const flag = require('emoji-flag')
+
 const helper = require('../helper')
 const storage = require('../storage')
 const google = require('../google')
 
 const LABEL_SETTINGS = 'settings'
 const DEFAULT_SETTINGS = {
+    code: 'VN',
+
     src: 'auto',
     target: 'vi',
     icon: true,
@@ -99,20 +110,33 @@ const DEFAULT_SETTINGS = {
 module.exports = {
     data() {
         return {
-            lang: 'en',
+            code: '',
+            countries: google.getCountries(),
 
             src: 'auto',
-            target: 'vi',
+            target: '',
             icon: false,
             dbclick: false,
             shift: false,
             tts: false,
 
+            lang: '',
             sl: {},
             tl: {},
         }
     },
     watch: {
+        async code(code) {
+            this.lang = google.getLangFromCode(code)
+            
+            const languages = await google.getLanguages(this.lang)
+            this.sl = languages.sl
+            this.tl = languages.tl
+
+            this.target = this.lang
+
+            this.save()
+        },
         src() {
             this.save()
         },
@@ -130,15 +154,12 @@ module.exports = {
         },
     },
     async created() {
-        const lang = await google.getUserCountry()
-        const languages = await google.getLanguages(lang)
-        this.lang = lang
-        this.sl = languages.sl
-        this.tl = languages.tl
-
-        this.load(settings => {
+        this.load(async settings => {
             if (!settings) {
+                this.code = await google.getUserCountry()
                 settings = DEFAULT_SETTINGS
+            } else {
+                this.code = settings.code
             }
 
             this.src = settings.src
@@ -151,12 +172,15 @@ module.exports = {
         })
     },
     methods: {
+        flag(code) {
+            return flag(code)
+        },
         close() {
             helper.closeTab()
         },
         save() {
             storage.set(LABEL_SETTINGS, {
-                lang: this.lang,
+                code: this.code,
                 src: this.src,
                 target: this.target,
                 icon: this.icon,

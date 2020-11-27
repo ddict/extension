@@ -6,7 +6,9 @@ const default_languages = require('./languages')
 const DDICT_HEADER = 'https://ddict.me'
 const MAX_LENGTH = 5000
 
+exports.getCountries = Translate.language.getCountries
 exports.getUserCountry = getUserCountry
+exports.getLangFromCode = getLangFromCode
 exports.getLanguages = getLanguages
 exports.translate = translate
 exports.tts = tts
@@ -25,10 +27,12 @@ async function getUserCountry() {
 
         country = await res.json()
     } finally {
-        code = Translate.language.mapLangFromCode(country.country)
+        return country.country
     }
+}
 
-    return code
+function getLangFromCode(code) {
+    return Translate.language.mapLangFromCode(code)
 }
 
 async function getLanguages(code) {
