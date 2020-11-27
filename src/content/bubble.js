@@ -16,6 +16,11 @@ const MIN_WIDTH = 120
 function create(src_speaker, data, onTTS, onSpell) {
     const wrapper = dom(document.createElement('div'))
         .addClass(CLASS_DDICT_WRAPPER)
+        .on('mousedown', e => {
+            // cancel another event listeners
+            e.cancelBubble = true
+            if (e.stopPropagation) e.stopPropagation()
+        })
         .appendTo('body')
 
     // speaker
@@ -23,13 +28,9 @@ function create(src_speaker, data, onTTS, onSpell) {
     speaker.src = src_speaker
     const speaker_wrapper = dom(speaker)
         .addClass(CLASS_DDICT_SPEAKER)
-        .on('mousedown', e => {
+        .on('mousedown', () => {
             // call background for tts
             onTTS()
-
-            // cancel another event listeners
-            e.cancelBubble = true
-            if (e.stopPropagation) e.stopPropagation()
         })
     wrapper.append(speaker_wrapper)
 
@@ -83,12 +84,8 @@ function create(src_speaker, data, onTTS, onSpell) {
         const spell = dom(document.createElement('span'))
             .addClass('ddict_spell')
             .text(data.spell.spell_res)
-            .on('mousedown', e => {
+            .on('mousedown', () => {
                 onSpell(data.spell.spell_res)
-
-                // cancel another event listeners
-                e.cancelBubble = true
-                if (e.stopPropagation) e.stopPropagation()
             })
         p.append(spell)
 
