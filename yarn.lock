@@ -873,15 +873,11 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@ddict/popup@^0.1.5":
-  version "0.1.5"
-  resolved "https://npm.pkg.github.com/download/@ddict/popup/0.1.5/f6c0da62cd48b39f50130c4560250a80e7b4d91f3384297bc1644fbe73e1acff#d1c0ee5e0bcf0010ef0988fcee9aeb07f3e4ddb0"
-  integrity sha512-S332hb+xaI0LrWf3VrVD0C2EH6LuB7W4k+m10y8bDH4CWffslXuViGB6qskyN8wt0SnB+V41bNxEXVTvTlHi6g==
+"@ddict/popup@^0.1.6":
+  version "0.1.6"
+  resolved "https://npm.pkg.github.com/download/@ddict/popup/0.1.6/24b6757aa95a28d049edf88027c0c544dbaa35cf65377913f48f0e81b6c27dd9#cb0545276b3f8908bb134fbb80a1c4980c28a851"
+  integrity sha512-yFbjKfpMLN87rVp4apuAqMpcExhomoIEcZFJts1007mIYdyyIxza4q7csaQkvxOW4Pp4dQPC5H+JwdlBatOLVQ==
   dependencies:
-    "@fortawesome/fontawesome-svg-core" "^1.2.32"
-    "@fortawesome/free-solid-svg-icons" "^5.15.1"
-    "@fortawesome/vue-fontawesome" "^2.0.0"
-    bootstrap-vue "^2.19.0"
     vue "^2.5.16"
 
 "@ddict/translate@^0.0.2":
