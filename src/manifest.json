@@ -1,6 +1,6 @@
 {
     "name": "Ddict Translate: Translator - Dictionary",
-    "version": "4.0.1",
+    "version": "4.0.2",
     "description": "Ddict helps you instantly translate text on websites by a double click or a keypress.",
     "manifest_version": 2,
     "commands": {
@@ -8,6 +8,11 @@
             "suggested_key": {
                 "default": "Alt+Shift+D"
             }
+        }
+    },
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "jid1-wC71d7poAZYEGA@jetpack"
         }
     },
     "permissions": [
@@ -18,6 +23,8 @@
         "contextMenus",
         "http://translate.google.com/*",
         "https://translate.google.com/*",
+        "http://translate.googleapis.com/*",
+        "https://translate.googleapis.com/*",
         "https://*.ddict.me/*",
         "http://*.ddict.me/*"
     ],
