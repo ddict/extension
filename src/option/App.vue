@@ -128,13 +128,16 @@ module.exports = {
     watch: {
         async code(code) {
             this.lang = google.getLangFromCode(code)
-            
+
             const languages = await google.getLanguages(this.lang)
             this.sl = languages.sl
             this.tl = languages.tl
 
             this.target = this.lang
 
+            this.save()
+        },
+        icon() {
             this.save()
         },
         src() {
