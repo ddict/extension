@@ -21,7 +21,7 @@ ex.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 sendResponse(data)
 
                 // auto tts & dictionary
-                if (autoTTS && data.dict) {
+                if (autoTTS && isAutoTTS(data)) {
                     tts(request.data, data.src, url => {
                         play(url)
                     })
@@ -97,4 +97,12 @@ function play(url) {
     const player = new Audio()
     player.src = url
     player.play().catch(() => {})
+}
+
+// auto tts when data is dict or has translits
+function isAutoTTS(data) {
+    // translit
+    const translits = data.sentences.filter(sentence => sentence.src_translit)
+
+    return data.dict || translits.length > 0
 }
