@@ -19,7 +19,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
-        "@ddict/popup": "^0.1.10",
+        "@ddict/popup": "^0.1.15",
         "@ddict/translate": "^0.0.4",
         "bootstrap": "^4.5.3",
         "bootstrap-vue": "^2.19.0",
