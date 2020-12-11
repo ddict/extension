@@ -11,7 +11,6 @@
 <script>
 const helper = require('../../helper')
 const storage = require('../../storage')
-const google = require('../../google')
 
 export default {
     name: 'Test',
@@ -22,34 +21,31 @@ export default {
             tts: {},
         }
     },
-    async created() {
-        const code = await google.getUserCountry()
-        const languages = await google.getLanguages(code)
-
-        this.loadSettings(settings => {
-            if (!settings) {
-                return
-            }
-
-            this.select = {
-                src: settings.src,
-                target: settings.target,
-
-                srcs: languages.sl,
-                targets: languages.tl,
-            }
-
-            // load history
-            storage.get('last_word', data => {
-                if (!data) return
-                this.loadData(data)
-            })
-        })
+    created() {
+        this.load()
     },
     methods: {
-        loadSettings(cb) {
-            storage.get('settings', settings => {
-                cb(settings)
+        load() {
+            storage.get('languages', languages => {
+                storage.get('settings', settings => {
+                    if (!settings) {
+                        return
+                    }
+
+                    this.select = {
+                        src: settings.src,
+                        target: settings.target,
+
+                        srcs: languages.sl,
+                        targets: languages.tl,
+                    }
+
+                    // load history
+                    storage.get('last_word', data => {
+                        if (!data) return
+                        this.loadData(data)
+                    })
+                })
             })
         },
         translate(text) {
@@ -69,19 +65,18 @@ export default {
         },
         loadData(data) {
             this.data = data
-                // set data src and target
-                if (!Object.prototype.hasOwnProperty.call(data, 'src')) {
-                    this.data.src = this.select.src
-                }
-                if (!Object.prototype.hasOwnProperty.call(data, 'target')) {
-                    this.data.target = this.select.target
-                }
-                this.data.ddictSrc = this.select.srcs[data.src]
-                this.data.ddictTarget = this.select.targets[data.target]
+            // set data src and target
+            if (!Object.prototype.hasOwnProperty.call(data, 'src')) {
+                this.data.src = this.select.src
+            }
+            if (!Object.prototype.hasOwnProperty.call(data, 'target')) {
+                this.data.target = this.select.target
+            }
+            this.data.ddictSrc = this.select.srcs[data.src]
+            this.data.ddictTarget = this.select.targets[data.target]
 
-                // generate tts urls
-                this.getTTS(this.data)
-                
+            // generate tts urls
+            this.getTTS(this.data)
         },
         getTTS(data) {
             helper.sendMsg(

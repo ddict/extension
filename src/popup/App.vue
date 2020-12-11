@@ -3,7 +3,7 @@
         <app-header></app-header>
 
         <div class="container-fluid">
-            <app-popup></app-popup />
+            <app-popup></app-popup>
 
             <app-footer></app-footer>
         </div>

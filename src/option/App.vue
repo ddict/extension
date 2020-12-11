@@ -133,6 +133,9 @@ module.exports = {
             this.sl = languages.sl
             this.tl = languages.tl
 
+            // save languagues
+            storage.set('languages', languages)
+
             this.target = this.lang
 
             this.save()
