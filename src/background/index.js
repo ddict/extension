@@ -11,7 +11,34 @@ const ERROR_LABEL =
 ex.runtime.onInstalled.addListener(() => {
     // open option page to set default settings
     helper.openTab(helper.getURL('/option/index.html'))
-    helper.openTab('https://ddict.me')
+
+    // get user lang and open the right ddict.me lang page
+    storage.get('settings', async settings => {
+        console.log(settings)
+        let lang = ''
+        if (!settings) {
+            const code = await google.getUserCountry()
+            lang = google.getLangFromCode(code)
+        } else {
+            lang = settings.target
+        }
+
+        let page = ''
+        switch (lang) {
+            case 'vi':
+                page = 'index.html'
+                break
+
+            case 'ru':
+                page = 'ru.html'
+                break
+
+            default:
+                page = 'en.html'
+        }
+
+        helper.openTab(`https://ddict.me/${page}#update`)
+    })
 })
 
 ex.runtime.onMessage.addListener((request, sender, sendResponse) => {
