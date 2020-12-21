@@ -23,3 +23,7 @@ yarn build
 ```
 
 The extension is the `build` folder.
+
+## note
+
+-   parcel process the `ga.js` file that makes google analytics scripts stop working. so we have to replace it after build.
