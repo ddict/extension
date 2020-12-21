@@ -4,7 +4,7 @@
     "scripts": {
         "lint": "eslint src/",
         "watch": "parcel watch src/manifest.json --no-hmr",
-        "build": "rm -r build; NODE_ENV=production parcel build src/manifest.json -d build --no-source-maps"
+        "build": "rm -r build; NODE_ENV=production parcel build src/manifest.json -d build --no-source-maps; cp src/ga.js build/"
     },
     "repository": "git@github.com:ddict/extension.git",
     "author": "ddo <itsanope@icloud.com>",
@@ -31,5 +31,7 @@
         "vue": "~2",
         "vue-router": "^3.1.6"
     },
-    "browserslist": ["last 1 Chrome versions"]
+    "browserslist": [
+        "last 1 Chrome versions"
+    ]
 }
