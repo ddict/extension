@@ -36,7 +36,10 @@ function init(settings) {
     if (settings.shift) {
         dom('html').on('keyup', e => {
             if (e && e.keyCode === 16) {
-                check(e)
+                setTimeout(() => {
+                    // evkey cause shift spam. so we need delay here
+                    check(e)
+                }, 20)
             }
         })
     }
