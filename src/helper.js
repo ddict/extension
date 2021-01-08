@@ -2,6 +2,10 @@ const ex = chrome || browser
 
 const google = require('./google')
 
+const wait = timeToDelay =>
+    new Promise(resolve => setTimeout(resolve, timeToDelay))
+
+exports.wait = wait
 exports.closeTab = closeTab
 exports.openTab = openTab
 exports.getURL = getURL

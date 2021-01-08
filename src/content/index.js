@@ -8,6 +8,8 @@ const bubble = require('./bubble')
 
 const dom = require('component-dom')
 
+const DELAY_POPUP = 20
+
 // media
 const src_spin = helper.getURL('/img/spin.gif')
 const src_logo = helper.getURL('/logo/16.png')
@@ -36,29 +38,26 @@ function init(settings) {
     if (settings.shift) {
         dom('html').on('keyup', e => {
             if (e && e.keyCode === 16) {
-                setTimeout(() => {
-                    // evkey cause shift spam. so we need delay here
-                    check(e)
-                }, 20)
+                check(e)
             }
         })
     }
 
     // ddict icon
     if (settings.icon) {
-        dom('html').on('mouseup', e => {
+        dom('html').on('mouseup', async e => {
             // we need to set delay a little bit
             // because when bubble close
             // the icon may show up
             // before the selected text disapear
-            setTimeout(() => {
-                // no icon if there is bubble
-                if (SPINNER || BUBBLE) {
-                    return
-                }
+            await helper.wait(DELAY_POPUP * 2)
 
-                check(e, true)
-            }, 20)
+            // no icon if there is bubble
+            if (SPINNER || BUBBLE) {
+                return
+            }
+
+            check(e, true)
         })
     }
 
@@ -80,7 +79,10 @@ function clean() {
     removeBubble()
 }
 
-function check(e, isIcon) {
+async function check(e, isIcon) {
+    // evkey cause shift spam. so we need delay here
+    await helper.wait(DELAY_POPUP)
+
     const select = getSelectedText(e)
     if (!select) {
         clean()
