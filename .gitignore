@@ -1,4 +1,7 @@
 build/
+build_firefox/
+build.crx
+build.pem
 
 # Logs
 logs

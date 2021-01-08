@@ -20,9 +20,13 @@ yarn watch
 
 ```sh
 yarn build
+
+# firefox build we disable google analytics
+yarn build-firefox
 ```
 
 The extension is the `build` folder.
+The firefox extension is the `build_firefox` folder.
 
 ## note
 

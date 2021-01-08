@@ -5,7 +5,7 @@
         "lint": "eslint src/",
         "watch": "parcel watch src/manifest.json --no-hmr",
         "build": "rm -r build; NODE_ENV=production parcel build src/manifest.json -d build --no-source-maps; cp src/ga.js build/",
-        "build-firefox": "rm -r build; NODE_ENV=production parcel build src/manifest.json -d build --no-source-maps; cp src/manifest_firefox.json build/manifest.json"
+        "build-firefox": "rm -r build_firefox; NODE_ENV=production parcel build src/manifest.json -d build_firefox --no-source-maps; cp src/manifest_firefox.json build_firefox/manifest.json"
     },
     "repository": "git@github.com:ddict/extension.git",
     "author": "ddo <itsanope@icloud.com>",
