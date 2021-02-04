@@ -11,6 +11,17 @@
                     >
                 </b>
             </p>
+            <p>
+                Sponsored by
+                <b>
+                    <a
+                        class="text-dark"
+                        target="_blank"
+                        href="https://jointoucan.com/partners/ddict"
+                        >Toucan</a
+                    >
+                </b>
+            </p>
         </small>
     </footer>
 </template>

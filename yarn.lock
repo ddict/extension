@@ -873,17 +873,17 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@ddict/popup@^0.1.15":
-  version "0.1.15"
-  resolved "https://npm.pkg.github.com/download/@ddict/popup/0.1.15/cd489504af88c70b3d7534db048cd20f969f7197acc2fdfea3b0b2ae099c465b#f6ee0d092a9763e51012bf15eb302d6d7efb471e"
-  integrity sha512-+5HEyPY3Waks5QQRVe69usad0q9XlpoC7N8m6KC9YFLn5hXNnJuySkYcrjTmYx1Ts0XmBPHXP1IG/qejQnwX0A==
+"@ddict/popup@^0.1.16":
+  version "0.1.16"
+  resolved "https://npm.pkg.github.com/download/@ddict/popup/0.1.16/30fe9774a528cc521f81f901461872c827f0e746d32130246c240dcfd722c929#cfda2ab763b76bb45c0ce82f61b1ceb25304ba40"
+  integrity sha512-tm7f0nfa9dZlzZhO6q2yYlSuMzf8RqgQOxeEKk6C2673gFUaaKloWRapEVCU3q05qKR8+RE1TlKFRsLwB5EYTg==
   dependencies:
     vue "^2.5.16"
 
-"@ddict/translate@^0.0.4":
-  version "0.0.4"
-  resolved "https://npm.pkg.github.com/download/@ddict/translate/0.0.4/8ec3dcd01c79ab53269892180c8113bebc27e6211fbabf324731d065711857d7#d56b6b56940d338861e93c13f364aff5384f90dc"
-  integrity sha512-skTTwJcvZ1c+nbNy5UvEtnA8QUFKSz7KPmJ4s8UfsgA4Ltp2AHEk1eruEWUZ0TX6UDeEXSC2IZOx/kg4zLt8rw==
+"@ddict/translate@^0.0.5":
+  version "0.0.5"
+  resolved "https://npm.pkg.github.com/download/@ddict/translate/0.0.5/f3423f859623ed03cd320ee462c0931cbaddc376f8b52e9e50829fbd61fa7629#95d0d69e6582bc00b6ecc94eaa470b1eff767946"
+  integrity sha512-aEKH2GppSLbnWqLpxqPhrwFf85tFGWq85HNjJ9GemyVAEqRfbjiJVKf1ZF8UbXd9jdXBSDmRe9K9GNlUfRLWGw==
   dependencies:
     country-data "0.0.31"
     qs "^6.5.2"
