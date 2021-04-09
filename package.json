@@ -3,7 +3,7 @@
     "version": "4.0.8",
     "scripts": {
         "lint": "eslint src/",
-        "watch": "parcel watch src/manifest.json --no-hmr",
+        "serve": "parcel watch src/manifest.json --no-hmr",
         "build": "rm -r build; NODE_ENV=production parcel build src/manifest.json -d build --no-source-maps; cp src/ga.js build/",
         "build-firefox": "rm -r build_firefox; NODE_ENV=production parcel build src/manifest.json -d build_firefox --no-source-maps; cp src/manifest_firefox.json build_firefox/manifest.json"
     },
@@ -20,7 +20,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
-        "@ddict/popup": "^0.1.16",
+        "@ddict/popup": "^0.1.18",
         "@ddict/translate": "^0.0.5",
         "bootstrap": "^4.5.3",
         "bootstrap-vue": "^2.19.0",

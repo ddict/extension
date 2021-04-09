@@ -4,7 +4,9 @@
             <!-- <p>About ― Contact ― Privacy</p> -->
             <p>This site is not affiliated with Google Translate</p>
             <p>
-                Since 2011 ― Made with ♥️ by
+                Since 2011 ― Made with
+                <b-icon-heart-fill></b-icon-heart-fill>
+                by
                 <b>
                     <a class="text-dark" target="_blank" href="https://ddo.me"
                         >Ddo</a

@@ -873,10 +873,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@ddict/popup@^0.1.16":
-  version "0.1.16"
-  resolved "https://npm.pkg.github.com/download/@ddict/popup/0.1.16/30fe9774a528cc521f81f901461872c827f0e746d32130246c240dcfd722c929#cfda2ab763b76bb45c0ce82f61b1ceb25304ba40"
-  integrity sha512-tm7f0nfa9dZlzZhO6q2yYlSuMzf8RqgQOxeEKk6C2673gFUaaKloWRapEVCU3q05qKR8+RE1TlKFRsLwB5EYTg==
+"@ddict/popup@^0.1.18":
+  version "0.1.18"
+  resolved "https://npm.pkg.github.com/download/@ddict/popup/0.1.18/6bf6b72795d2a5375a0e27ed202b01dd937b873d3d353ac8714029afd28cb6f3#f6ec826731b1e2a07062b28c5a649e49a43c435d"
+  integrity sha512-3nua+N8QICQfA9TuwFfMMzlWPYYsH7aDAlBGzH//yJFKSBT0TwXY5ISaDphvBPH+PQZ10OLKmuOrZb3cM8mLLQ==
   dependencies:
     vue "^2.5.16"
 
