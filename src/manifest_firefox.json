@@ -1,6 +1,6 @@
 {
     "name": "Ddict Translate: Translator - Dictionary",
-    "version": "4.0.8",
+    "version": "4.0.9",
     "description": "Ddict helps you instantly translate text on websites by a double click or a keypress.",
     "manifest_version": 2,
     "commands": {
@@ -19,8 +19,6 @@
         "webRequest",
         "webRequestBlocking",
         "storage",
-        "notifications",
-        "contextMenus",
         "http://translate.google.com/*",
         "https://translate.google.com/*",
         "http://translate.googleapis.com/*",
